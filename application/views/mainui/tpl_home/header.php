@@ -9,6 +9,7 @@
         foreach($page_meta as $pagemeta):
       ?>
          <meta name="description" content="<?php echo $pagemeta['configValue']; ?>">
+          <meta name="keywords" content="<?php  echo $page_meta['configValue']; ?>">
     <?php endforeach; ?>
 
     <?php
