@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Description of AdminController
+ * Neko CMS! a very simple CMS using codeigniter!
  *
  * @author Novi
  */
