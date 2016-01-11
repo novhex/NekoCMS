@@ -2,7 +2,7 @@ RewriteEngine on
 #remove the comment below if you are running in localhost (XAMPP/WAMP)
 # where ci_production is the name of your folder containing the files of your project
 RewriteBase /ci_production 
-#remove the comment below if you are running in a live server !
+#remove the comment below if you are running in a live server!
 #RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
