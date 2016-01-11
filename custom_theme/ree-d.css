@@ -1,0 +1,66 @@
+
+
+.navbar-default {
+    background-color: red;
+    border-color: #e7e7e7;
+
+}
+.navbar-default .navbar-nav>li>a{
+  color:white;
+}
+
+.navbar-default .navbar-brand {
+color:white;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus{
+color:white;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus{
+  color:white;
+}
+
+.breadcrumb{
+  color:white;
+  background-color: red;
+}
+.breadcrumb a{
+  color:white;
+  background-color: red;
+}
+
+.navbar-default .navbar-nav>li>a{
+  color:white;
+}
+.panel > .panel-heading{
+  background-color:red;
+  color:white;
+}
+#footer {
+    background-color: red;
+    width: 100%;
+    color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+#footer select{
+  color:black;
+}
+#footer a{
+  color:white;
+}
+#footer a:focus{
+  color:cyan;
+}
+#footer a:hover{
+  color:cyan;
+}
+.well{
+  color:white;
+  background-color:red;
+}
+.well legend{
+  color:white;
+}

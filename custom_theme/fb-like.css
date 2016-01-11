@@ -1,0 +1,92 @@
+body{
+  font-family:Tahoma;
+}
+
+.navbar-default {
+    background-color: #3b5998;
+    border-color: #e7e7e7;
+
+}
+.navbar-default .navbar-nav>li>a{
+  color:white;
+}
+
+.navbar-default .navbar-brand {
+color:white;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus{
+color:white;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus{
+  color:white;
+}
+
+.breadcrumb{
+  color:white;
+  background-color: #3b5998;
+}
+.breadcrumb a{
+  color:white;
+  background-color: #3b5998;
+}
+
+.navbar-default .navbar-nav>li>a{
+  color:white;
+}
+.panel > .panel-heading{
+  background-color:#3b5998;
+  color:white;
+}
+#footer {
+    background-color: #3b5998;
+    width: 100%;
+    color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+#footer select{
+  color:black;
+}
+#footer a{
+  color:white;
+}
+#footer a:focus{
+  color:white;
+}
+#footer a:hover{
+  color:white;
+}
+.well{
+  color:white;
+  background-color:#3b5998;
+}
+.well legend{
+  color:white;
+}
+.butt{
+display: inline-block;
+
+    background: #627aac url('facebook_small.png') left no-repeat;
+
+    border-top: 1px solid #29447e;
+    border-right: 1px solid #29447e;
+    border-bottom: 1px solid #1a356e;
+    border-left: none;
+
+    height: 22px;
+
+    padding-right: 7px;
+    padding-left: 29px;
+
+    font-weight: bold;
+    font-size: 11px;
+    color: white;
+    text-decoration: none;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    line-height: 22px;
+
+    cursor: pointer;
+}

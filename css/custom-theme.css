@@ -1,0 +1,77 @@
+
+.navbar-default{
+
+  background-color:purple;
+}
+
+.navbar-default .navbar-nav > li > a,
+
+{
+
+  color:white;
+}
+.navbar-default .navbar-nav > li a:hover{
+  background-color: white;
+}
+
+.navbar-default .navbar-nav > li > a{
+
+  color:white;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus
+{
+
+  color:white;
+}
+.td-head{
+	font-style: Tahoma;
+	  background-color:purple;
+	  color: white;
+}
+body {
+
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+.icon-bar{
+	color:white;
+}
+.btn-custom {
+	background-color: purple;
+	color:white;
+	border: none;
+
+}
+.td-cust:hover{
+
+	background-color: purple;
+	color: white;
+}
+
+.btn-custom:hover{
+	background-color: purple;
+
+	color:white;
+}
+.btn-custom:focus{
+background-color: purple;
+	color:white;
+
+}
+.well{
+background-color: purple;
+	color:white;
+
+}
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th,
+.table-hover tbody tr:hover a
+ {
+	background-color: purple;
+	color: white;
+}
