@@ -52,7 +52,7 @@
                    </div>
 
                    <h1> <span class='glyphicon glyphicon-sunglasses'></span> Administrator Account </h1>
-                   <label class='label label-danger'>[ Note: Leave " New Password " field empty if you don't want  to change your password but if it is the first time to run , please change the default password. ]</label>
+                   <div class='alert alert-warning'>[ Note: Leave " New Password " field empty if you don't want  to change your password but if it is the first time to run , please change the default password. ] <a data-dismiss="alert" href="#">X</a></div>
 
                    <hr>
 
