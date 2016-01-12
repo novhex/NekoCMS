@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="<?php echo base_url()?>images/ci-icon.ico">
+    <link href="<?php echo base_url('font-awesome/css/font-awesome.css');?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/dashboard-custom.css">
     <script type="text/javascript" src="<?php echo base_url(); ?>tinymce/tinymce.min.js"></script>
     <?php

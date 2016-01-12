@@ -23,6 +23,7 @@ class Pages extends CI_Controller{
     public function __construct() {
             parent::__construct();
             $this->load->database();
+            $this->load->library('settings');
             $this->load->helper(array('url','captcha'));
             $this->load->library(array('session','pagination','form_validation','user_agent'));
             $this->load->model('pagesmodel');
