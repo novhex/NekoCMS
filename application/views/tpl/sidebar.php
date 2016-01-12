@@ -12,7 +12,8 @@
 
             <ul class='sidebar-nav'>
                 <li class='sidebar-brand'>
-                    <a href='#'><span class='glyphicon glyphicon-cog'></span>&nbsp;
+                    <a href='#'><i class="fa fa-wrench"></i>
+&nbsp;
                     D A S H B O A R D
                     </a>
                 </li>
@@ -49,7 +50,8 @@
 
                     <li> <a href='<?php echo base_url();?>admincontroller/dashboard'> <span class='glyphicon glyphicon-home'></span> &nbsp; Dashboard Home</a></li>
             <li><a href='<?php echo base_url();?>admincontroller/inbox'><span class='glyphicon glyphicon-envelope'></span>&nbsp; Unread Messages(s) <?php   echo $message_count; ?></a></li>
-            <li><a href='<?php echo base_url();?>admincontroller/siteinfo'><span class='glyphicon glyphicon-th'></span>&nbsp; Site Info</a></li>
+            <li><a href='<?php echo base_url();?>admincontroller/siteinfo'><i class="fa fa-globe"></i>
+&nbsp; Site Info</a></li>
                  <li> <a  onClick="showModal();" class="open-LogoutDialog" data-id="logout" href="#"> <span class="glyphicon glyphicon-off"></span> &nbsp; Logout <?php echo ucfirst($userData['nickname']); ?></a></li>
             </ul>
         </div>
