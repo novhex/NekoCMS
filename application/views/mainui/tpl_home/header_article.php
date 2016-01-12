@@ -25,7 +25,7 @@
     <script src='<?php echo base_url();?>js/jquery.min.js'></script>
 <script src='<?php echo base_url();?>js/bootstrap-alert.js'></script>
          <script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
-
+             <link href="<?php echo base_url();?>font-awesome/css/font-awesome.css" rel="stylesheet">
         <link href="<?php echo base_url();?>css/bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo base_url();?>css/sticky_footer.css" rel="stylesheet">
         <?php
