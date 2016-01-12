@@ -24,7 +24,7 @@ $(document).on("click", ".open-DeleteDialog", function (e) {
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h1>Messages &nbsp; <a href='#menu-toggle' class='btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
+                        <h1>Messages &nbsp; <a href='#menu-toggle' class='pull-right btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
                           <?php
                                if($this->session->flashdata('msgdelete_success')!=''){
                            echo "<div class='alert alert-success'><a class='close' data-dismiss='alert'>×</a><strong>Info: </strong>".$this->session->flashdata('msgdelete_success')."</div>";

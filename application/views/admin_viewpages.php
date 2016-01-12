@@ -65,7 +65,7 @@ $(document).on("click", ".open-DeleteDialog", function (e) {
             <div class='container-fluid'>
                 <div class='row'>
                     <div class='col-lg-12'>
-                        <h1><span class='glyphicon glyphicon-list'></span>&nbsp; Your Pages &nbsp;  <a href='#menu-toggle' class='btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
+                        <h1><span class='glyphicon glyphicon-list'></span>&nbsp; Your Pages &nbsp;  <a href='#menu-toggle' class='pull-right btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
 
                            <form id='defaultForm' class='form-horizontal' method='POST'>
 

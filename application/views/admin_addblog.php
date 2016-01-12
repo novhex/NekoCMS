@@ -14,7 +14,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1><span class='glyphicon glyphicon-pencil'></span>&nbsp; Add New Blog Post &nbsp; <a href='#menu-toggle' class='btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
+                        <h1><span class='glyphicon glyphicon-pencil'></span>&nbsp; Add New Blog Post &nbsp; <a href='#menu-toggle' class='btn btn-success pull-right'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
 
                                <hr>    
                 <?php
