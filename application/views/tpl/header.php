@@ -1,50 +1,65 @@
 <!DOCTYPE html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="<?php echo base_url()?>images/ci-icon.ico">
-    <link href="<?php echo base_url('font-awesome/css/font-awesome.css');?>" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/dashboard-custom.css">
-    <script type="text/javascript" src="<?php echo base_url(); ?>tinymce/tinymce.min.js"></script>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?php echo $page_title; ?></title>
+
+<link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
+<link href="<?php echo base_url('css/styles.css');?>" rel="stylesheet">
+
+<link rel="icon" href="<?php echo base_url('images/ci-icon.ico')?>">
+    
+
+
+   
+ 
+
     <?php
      echo "<script src='".base_url()."js/jquery.min.js'></script> \n";  
      echo "<script src='".base_url()."js/bootstrap-alert.js'></script> \n";  
      ?>
-         <script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
+         <script type="text/javascript" src="<?php echo base_url('tinymce/tinymce.min.js'); ?>"></script>
+   		 <script src="<?php echo base_url('js/lumino.glyphs.js');?>"></script>
+		<script src="<?php echo base_url('js/bootbox.js');?>"></script>
+         <script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
    
-        <link href="<?php echo base_url();?>css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo base_url();?>css/sticky_footer.css" rel="stylesheet">    
-        <?php
-            switch($page_name){
-                case 'login_page';
-                    echo "<link href='".base_url()."css/signin.css' rel='stylesheet'>";      
-                break;
-                
-              case 'dashboard';
-                    echo "<link href='".base_url()."css/sidebar.css' rel='stylesheet'>";      
-                break;
-            
-                case 'addblog':
-                       echo "<link href='".base_url()."css/sidebar.css' rel='stylesheet'>";
-                       echo "<script src='".base_url()."js/bootstrap-alert.js'></script>";
-                break;    
-                
-            }
-        ?>
-        
-            <?php echo "<title>". $page_title ."</title>"; ?>
-    
-        </head>
 
-    <body>
 
-<script type="text/javascript">
-  function showModal(){
-  $('#myModal').modal('show')
-  }
-</script>
-  
-  
+
+
+<!--Icons-->
+
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="<?php echo base_url('admincontroller'); ?>"><span>Neko</span>CMS</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>  <?php  echo $this->session->userdata('nickname');?> <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<?php echo base_url('admincontroller/siteinfo');?>"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+							
+							<li><a href="<?php echo base_url('admincontroller/logout');?>"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>

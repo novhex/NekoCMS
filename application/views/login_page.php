@@ -1,22 +1,31 @@
-<div class="container">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Login</title>
 
+<link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="<?php echo base_url('css/styles.css');?>" rel="stylesheet">
 
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
 
-    </div> <!-- /container -->
-<!--login modal-->
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
+</head>
 
-      </div>
-      <div class="modal-body">
-           <form action="<?php echo base_url()."admincontroller/login"; ?>" class="form-signin" method="POST" accept-charset="utf-8">
-             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-
-        <h2 class="form-signin-heading">Please sign in</h2>
-
-        <?php
+<body>
+	
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">Log in</div>
+				<div class="panel-body">
+					<form role="form" action="<?php echo base_url('admincontroller/login'); ?>" method="POST" accept-charset="utf-8">
+						<fieldset>
+						      <?php
 
 
         if(!empty(validation_errors()))
@@ -35,22 +44,45 @@
         echo "<div class='alert alert-info'><a class='close' data-dismiss='alert'>×</a><strong>Info: </strong>".$this->session->flashdata('changes2')."</div>";
         }
         ?>
-        <label for="inputUsername">Username</label>
-        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" >
+							<div class="form-group">
+								<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" >
+							</div>
+							<div class="form-group">
+								 <input type="password"  name="password" id="inputPassword" class="form-control" placeholder="Password">
+							</div>
+							<div class="checkbox">
+								<label>
+									<input name="remember" type="checkbox" value="Remember Me">Remember Me
+								</label>
+							</div>
+							<button type="submit" class="btn btn-success">Login</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div><!-- /.col-->
+	</div><!-- /.row -->	
+	
+		
 
-        <label for="inputPassword">Password</label>
-        <input type="password"  name="password" id="inputPassword" class="form-control" placeholder="Password">
-        <div class="checkbox">
-            <label>
-          </label>
-        </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit"><span class="glyphicon glyphicon-lock"></span> &nbsp; Sign in</button>
-        <a href="<?php echo base_url()."admincontroller/forgotpassword";?>"  class="btn btn-lg btn-success btn-block"><span class="glyphicon glyphicon-exclamation-sign"></span> &nbsp; Forgot Password ?</a>
-      </form>
-      </div>
-      <div class="modal-footer">
-          <p> <span class='glyphicon glyphicon-home'></span>&nbsp;  <?php echo anchor(base_url(),'Return Home');?> | <span class='glyphicon glyphicon-qrcode'></span> &nbsp; <?php echo anchor('https://fb.com/novhz.emo94','Developed by Novi'); ?></p>
-      </div>
-  </div>
-  </div>
-</div>
+	<script src="<?php echo base_url('js/jquery-1.11.1.min.js');?>"></script>
+	<script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
+
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>

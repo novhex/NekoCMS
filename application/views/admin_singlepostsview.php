@@ -1,27 +1,42 @@
-<?php 
-    $userData=$this->session->all_userdata();
-    if($userData['username']==''){
-        echo "<script>window.location='index'</script>";
-        
-    }
- ?>
-    <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1><span class='glyphicon glyphicon-zoom-in'></span> Viewing Post</h1>
- <hr>
 
+
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Viewing a Blog Post</li>
+            </ol>
+        </div><!--/.row-->
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Viewing a Blog Post</h1>
+            </div>
+        </div><!--/.row-->
+                
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Viewing a Blog Post</div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                                           
         <h3><span class='glyphicon glyphicon-book'></span> <?php echo $news['title'] ?></h3>
-       <strong><span class='glyphicon glyphicon-calendar'></span> Date posted: </strong><?php echo $news['date_posted']; ?>
+       <strong><span class='glyphicon glyphicon-calendar'></span> Date posted: </strong><?php echo date('F j, Y', strtotime($news['date_posted'])); ?>
         <div class="main">
-            <hr>
+         <br>
                 <?php echo $news['text'] ?>
         </div>
         <hr>
-                        <a href="<?php echo base_url()?>admincontroller/posts"  style="width: 190px; height: 40px;" class="btn btn-success"><span class='glyphicon glyphicon-arrow-left'></span><strong> Return to all posts</strong><a>
-                            <a href='#menu-toggle' class='pull-right btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; <strong>Hide/Show Sidebar</strong></a>
+                        <a href="<?php echo base_url('admincontroller/posts');?>"  class="btn btn-success"><span class='glyphicon glyphicon-arrow-left'></span><strong> Return to all posts</strong><a>
+                         
+                    </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div><!-- /.col-->
+        </div><!-- /.row -->
+        
+    </div><!--/.main-->

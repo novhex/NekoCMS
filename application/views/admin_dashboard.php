@@ -1,35 +1,32 @@
-<?php
-    $userData=$this->session->all_userdata();
-    if($userData['username']==''){
-        echo "<script>window.location='index'</script>";
-
-    }
- ?>
 
 
-     <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1><img onclick='' data-holder-rendered='true' src='<?php echo $userData['display_photo']; ?>' style='width: 100px; height: 100px;' data-src='holder.js/200x200' class="img-thumbnail" alt='' /> &nbsp; Welcome back <?php echo ucfirst($userData['nickname']); ?> &nbsp; <a href='#menu-toggle' class='pull-right btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
-</h1>
-<hr>
-                        <div class="panel panel-success">
-                        <div class="panel-heading">
-                          <h3 class="panel-title">Notification Centre</h3>
-                        </div>
-                        <div class="panel-body">
-                        <?php
-
-                        echo "<p><span class='glyphicon glyphicon-comment'></span> &nbsp; ".$message_count ." Unread Message(s) in your <a href='".base_url()."admincontroller/inbox'>inbox.</a></p>";
-                        echo "<p><span class='glyphicon glyphicon-stats'></span> &nbsp;".$visitor_count. " Total Unique Visitor(s)</p>";
-                        echo "<p><span class='glyphicon glyphicon-pushpin'></span> &nbsp;".$post_count." Total Posted Articles</p>";
-                        ?>
-                        </div>
-                      </div>
 
 
-                         </div>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Dashboard Home</li>
+            </ol>
+        </div><!--/.row-->
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Dashboard Home</h1>
+            </div>
+        </div><!--/.row-->
+                
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Dashboard Home</div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                        
                     </div>
                 </div>
-            </div>
+            </div><!-- /.col-->
+        </div><!-- /.row -->
+        
+    </div><!--/.main-->

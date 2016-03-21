@@ -1,11 +1,29 @@
-<div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Editing a Page:  <?php echo $page_to_edit['page_name']; ?> &nbsp; <a href='#menu-toggle' class='pull-right btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; Hide/Show Sidebar</a></h1>
 
-                               <hr>    
-                <?php
+
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Editing A Page</li>
+            </ol>
+        </div><!--/.row-->
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Editing A Page</h1>
+            </div>
+        </div><!--/.row-->
+                
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Editing A Page</div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+               <?php
                 if(validation_errors()){
                 echo "<div class='alert alert-danger' style='width:965px; height:85px;'><a class='close' data-dismiss='alert'>×</a>".validation_errors()."</div>"; 
                 }
@@ -40,4 +58,9 @@
                          </div> 
                         </div>
                     </form>
-               </div>         
+                    </div>
+                </div>
+            </div><!-- /.col-->
+        </div><!-- /.row -->
+        
+    </div><!--/.main-->

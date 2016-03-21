@@ -37,7 +37,7 @@ class Admincontroller extends CI_Controller {
     }
        $data['page_title']="Admin Login";
         $data['page_name']="login_page";
-        $this->load->view('tpl/header',$data);
+        
         $this->load->view('login_page');
         $this->load->view('tpl/footer',$data);
 }
@@ -54,7 +54,7 @@ class Admincontroller extends CI_Controller {
     {
          $data['page_title']="Admin Login";
         $data['page_name']="login_page";
-        $this->load->view('tpl/header',$data);
+        
         $this->load->view('login_page');
         $this->load->view('tpl/footer',$data);
 
@@ -115,12 +115,12 @@ public function inbox($offset=0){
     $this->load->view('tpl/sidebar');
     $this->load->view('admin_inbox',$data);
     $this->load->view('tpl/footer',$data);*/
-	   $uri_segment = 3;
-		$offset = $this->uri->segment($uri_segment);
-
-	  $config['base_url'] = base_url().'admincontroller/inbox';
-    $config['total_rows'] =$this->adminmodel->unread_message_count();
- 		$config['per_page'] = 10;
+	 
+	 $uri_segment = 3;
+	 $offset = $this->uri->segment($uri_segment);
+	 $config['base_url'] = base_url().'admincontroller/inbox';
+     $config['total_rows'] =$this->adminmodel->unread_message_count();
+ 	 $config['per_page'] = 10;
      $config['prev_link'] = '&laquo;';
      $config['next_link'] = '&raquo;';
      $config['full_tag_open'] = '<ul class="pagination">';
@@ -134,14 +134,14 @@ public function inbox($offset=0){
      $config['cur_tag_close'] = '</a></li>';
      $config['num_tag_open'] = '<li>';
      $config['num_tag_close'] = '</li>';
-		$config['uri_segment'] = $uri_segment;
-		$this->pagination->initialize($config);
-    $data['message_count']=$this->adminmodel->unread_message_count();
-    $data['message_list']=$this->adminmodel->fetch_unread_messages(10,$offset);
-    $this->load->view('tpl/header',$data);
-    $this->load->view('tpl/sidebar');
-    $this->load->view('admin_inbox',$data);
-    $this->load->view('tpl/footer',$data);
+	 $config['uri_segment'] = $uri_segment;
+	 $this->pagination->initialize($config);
+     $data['message_count']=$this->adminmodel->unread_message_count();
+     $data['message_list']=$this->adminmodel->fetch_unread_messages(10,$offset);
+     $this->load->view('tpl/header',$data);
+     $this->load->view('tpl/sidebar');
+     $this->load->view('admin_inbox',$data);
+     $this->load->view('tpl/footer',$data);
 
 
 
@@ -165,6 +165,7 @@ public function dashboard(){
 public function addpage() {
     $this->form_validation->set_rules('txt_pagedesc','Page Description','required|trim|max_length[200]');
     $this->form_validation->set_rules('txt_pagetitle','Page Name','required|min_length[4]|trim|max_length[21]');
+    $this->form_validation->set_error_delimiters("<p style='color:red;'>*","</p>");
 
     if($this->form_validation->run()===FALSE){
           $data['message_count']=$this->adminmodel->unread_message_count();
@@ -182,9 +183,10 @@ public function addpage() {
 
 
 public function addblog(){
-   $this->form_validation->set_rules('txt_title', 'Blog Title', 'trim|required|min_length[12]|max_length[128]');
+    $this->form_validation->set_rules('txt_title', 'Blog Title', 'trim|required|min_length[12]|max_length[128]');
     $this->form_validation->set_rules('txt_content', 'Blog Content', 'trim|required');
     $this->form_validation->set_rules('dropdownCateg', 'Blog Category', 'required');
+    $this->form_validation->set_error_delimiters("*","");
 
     if ($this->form_validation->run() === FALSE)
     {
@@ -301,7 +303,7 @@ redirect(base_url().'admincontroller/posts');
             $data['page_title']="Dashboard &raquo; Editing  A Post ";
             $data['page_name']="dashboard";
             $data['message_count']=$this->adminmodel->unread_message_count();
-             $data['page_categories']=$this->adminmodel->get_categories();
+            $data['page_categories']=$this->adminmodel->get_categories();
             $this->load->view('tpl/header',$data);
             $this->load->view('tpl/sidebar');
             $this->load->view('admin_edit_news',$data);
@@ -343,16 +345,13 @@ public function editpage($page){
   }
 }
 
- public function pageautocomplete()
-    {
+ public function pageautocomplete(){
 
        $search_data = $this->input->post('search_page');
         $query = $this->adminmodel->page_get_autocomplete($search_data);
 
         foreach ($query->result() as $row):
-
-
-          $html="<h3><span class='glyphicon glyphicon-info-sign'></span> ".$row->page_name."</h3>";
+          $html="<h3><span class='glyphicon glyphicon-info-sign'></span>&nbsp; ".$row->page_name."</h3>";
           $html.="<h4><span class='glyphicon glyphicon-road'></span> Page URL: ".anchor("pages/section/".$row->page_slug,'')."</h4>";
           $html.="<div class='main'>Description: ".$row->page_description."</div>";
           $html.="<p><a href='". base_url()."admincontroller/editpage/".$row->page_slug."'><span class='glyphicon glyphicon-edit'></span> Edit Page</a> | <a  data-id='$row->page_slug' title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete Page</a></p>";
@@ -360,20 +359,22 @@ public function editpage($page){
         endforeach;
     }
 
-    public function pagedefaultsearch(){
+
+public function pagedefaultsearch(){
 
         $query = $this->adminmodel->page_get_defaultsearch();
 
         foreach ($query->result() as $row):
 
 
-          $html="<h3><span class='glyphicon glyphicon-info-sign'></span> ".$row->page_name."</h3>";
+          $html="<h3><span class='glyphicon glyphicon-info-sign'></span>&nbsp; ".$row->page_name."</h3>";
           $html.="<h4><span class='glyphicon glyphicon-road'></span> Page URL: ".anchor("pages/section/".$row->page_slug,'')."</h4>";
           $html.="<div class='main'>Description: ".$row->page_description."</div>";
           $html.="<p><a href='". base_url()."admincontroller/editpage/".$row->page_slug."'><span class='glyphicon glyphicon-edit'></span> Edit Page</a> | <a  data-id='$row->page_slug' title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete Page</a></p>";
           echo $html;
         endforeach;
 }
+
 
    public function autocomplete()
     {
