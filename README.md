@@ -11,14 +11,16 @@ Upcoming Updates
 Add Multiple User Functionallity
 Post View Count
 
+And many many more............
+
 ----------------------------
 Updated Routes
 
 admin page 
 Old:
-http://domain.com/admincontroller/
+http://<domain here>/admincontroller/
 New:
-http://domain.com/neko-admin/
+http://<domain here>/neko-admin/
 ------------------------------
 
 
