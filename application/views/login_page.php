@@ -23,7 +23,7 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<form role="form" action="<?php echo base_url('admincontroller/login'); ?>" method="POST" accept-charset="utf-8">
+					<form role="form" action="<?php echo base_url('neko-admin/login'); ?>" method="POST" accept-charset="utf-8">
 						<fieldset>
 						      <?php
 
@@ -56,6 +56,7 @@
 								</label>
 							</div>
 							<button type="submit" class="btn btn-success">Login</button>
+							<a href="<?php echo base_url();?>" class="btn btn-success">Back to Main Page</a>
 						</fieldset>
 					</form>
 				</div>

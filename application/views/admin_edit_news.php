@@ -5,7 +5,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
         <div class="row">
             <ol class="breadcrumb">
-                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="<?php echo base_url('neko-admin/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
                 <li class="active">Editing A Blog Post</li>
             </ol>
         </div><!--/.row-->
@@ -26,7 +26,7 @@
        
 
 
-                    <form role="form" accept-charset="utf-8" method="POST" action="<?php echo base_url('admincontroller/edit')."/".$news['slug'];?>"  accept-charset="utf-8">
+                    <form role="form" accept-charset="utf-8" method="POST" action="<?php echo base_url('neko-admin/edit')."/".$news['slug'];?>"  accept-charset="utf-8">
                             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                                    <input type='hidden' name='txt_slug' value='<?php echo $news['slug'];?>' readonly='' />
 

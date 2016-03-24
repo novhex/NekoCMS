@@ -5,7 +5,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
         <div class="row">
             <ol class="breadcrumb">
-                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="<?php echo base_url('neko-admin/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
                 <li class="active">Editing A Page</li>
             </ol>
         </div><!--/.row-->
@@ -31,7 +31,7 @@
                 
                 <div class='row'>
                     <div class='col-lg-12'>
-                        <form id='defaultForm' method='post' class='form-horizontal' action='<?php echo base_url();?>admincontroller/editpage/<?php echo $page_to_edit['page_slug']; ?>' accept-charset="utf-8">
+                        <form id='defaultForm' method='post' class='form-horizontal' action='<?php echo base_url();?>neko-admin/editpage/<?php echo $page_to_edit['page_slug']; ?>' accept-charset="utf-8">
                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
                         <div class='form-group'>

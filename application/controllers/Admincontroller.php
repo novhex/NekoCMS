@@ -33,7 +33,7 @@ class Admincontroller extends CI_Controller {
 
     public function index(){
          if($this->adminmodel->hasCurrentLoggedIn()==TRUE){
-           redirect(base_url().'admincontroller/dashboard');
+           redirect(base_url().'neko-admin/dashboard');
     }
        $data['page_title']="Admin Login";
         $data['page_name']="login_page";
@@ -44,7 +44,7 @@ class Admincontroller extends CI_Controller {
 
     public function login(){
      if($this->adminmodel->hasCurrentLoggedIn()==TRUE){
-         redirect(base_url().'admincontroller/dashboard');
+         redirect(base_url().'neko-admin/dashboard');
     }
     else{
     $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[45]');
@@ -63,10 +63,10 @@ class Admincontroller extends CI_Controller {
     else{
          if($this->adminmodel->checkLoginDetails()==TRUE){
 
-          redirect(base_url().'admincontroller/dashboard');
+          redirect(base_url().'neko-admin/dashboard');
            }else{
                $this->session->set_flashdata('login_error','Invalid Username or Password...');
-              redirect(base_url().'admincontroller/index');
+              redirect(base_url().'neko-admin/index');
            }
 
         }
@@ -80,7 +80,7 @@ class Admincontroller extends CI_Controller {
          $array_items = array('username','__ci_last_regenerate','nickname','logged_in','display_photo');
          $this->session->unset_userdata($array_items);
          $this->session->set_flashdata('dc_notice','You are disconnected...');
-       redirect(base_url().'admincontroller/index');
+       redirect(base_url().'neko-admin/index');
  }
 
 public function inbox($offset=0){
@@ -90,7 +90,7 @@ public function inbox($offset=0){
     /*$uri_segment = 5;
 		$offset = $this->uri->segment($uri_segment);
 
-    $config['base_url'] = base_url().'admincontroller/inbox';
+    $config['base_url'] = base_url().'neko-admin/inbox';
     $config['total_rows'] =$this->adminmodel->unread_message_count();
     $config['per_page'] = 10;
     $config['num_links'] =$this->adminmodel->unread_message_count();
@@ -118,7 +118,7 @@ public function inbox($offset=0){
 	 
 	 $uri_segment = 3;
 	 $offset = $this->uri->segment($uri_segment);
-	 $config['base_url'] = base_url().'admincontroller/inbox';
+	 $config['base_url'] = base_url().'neko-admin/inbox';
      $config['total_rows'] =$this->adminmodel->unread_message_count();
  	 $config['per_page'] = 10;
      $config['prev_link'] = '&laquo;';
@@ -202,7 +202,7 @@ public function addblog(){
     }else{
            $this->adminmodel->set_news();
            $this->session->set_flashdata('addblog_success','Blog Succesfully Posted');
-         redirect(base_url().'admincontroller/posts');
+         redirect(base_url().'neko-admin/posts');
 
     }
 }
@@ -212,10 +212,10 @@ public function redirpage(){
   $page_number=$this->input->post('goto');
   if(!empty($page_number)){
 
-   redirect(base_url().'admincontroller/posts/'.$page_number);
+   redirect(base_url().'neko-admin/posts/'.$page_number);
   }else{
 
-     redirect(base_url().'admincontroller/posts');
+     redirect(base_url().'neko-admin/posts');
   }
 }
 
@@ -241,7 +241,7 @@ public function posts($offset=0){
         $this->load->view('tpl/header',$data);
         $this->load->view('tpl/sidebar');
         $config['uri_segment'] = 3;
-        $config['base_url'] = base_url().'admincontroller/posts';
+        $config['base_url'] = base_url().'neko-admin/posts';
         $config['total_rows'] =$this->adminmodel->record_count();
         $config['per_page'] = 10;
         $config['num_links'] =$this->adminmodel->record_count();
@@ -268,7 +268,7 @@ public function posts($offset=0){
 public function view($slug) {
     if(empty($slug))
   {
-    redirect(base_url().'admincontroller/posts');
+    redirect(base_url().'neko-admin/posts');
   }
   else{
             if($this->adminmodel->viewnews($slug)!=NULL){
@@ -281,7 +281,7 @@ public function view($slug) {
             $this->load->view('admin_singlepostsview',$data);
             $this->load->view('tpl/footer',$data);
             }else{
-               redirect(base_url().'admincontroller/posts');
+               redirect(base_url().'neko-admin/posts');
             }
   }
 }
@@ -289,7 +289,7 @@ public function view($slug) {
 public function edit($slug){
     if(empty($slug))
   {
-redirect(base_url().'admincontroller/posts');
+redirect(base_url().'neko-admin/posts');
   }
   else{
 
@@ -312,14 +312,14 @@ redirect(base_url().'admincontroller/posts');
     }else{
              $this->adminmodel->saveEditedNews();
              $this->session->set_flashdata('edit_success','Post Succesfully Edited');
-        redirect(base_url().'admincontroller/posts');
+        redirect(base_url().'neko-admin/posts');
    }
   }
 }
 
 public function editpage($page){
   if(empty($page)){
-    redirect('admincontroller/pages');
+    redirect('neko-admin/pages');
   }else{
     //fetchPageToEdit
     $this->form_validation->set_rules('txt_pagedesc','Page Description','required|trim|max_length[200]');
@@ -338,7 +338,7 @@ public function editpage($page){
       }else{
           $this->adminmodel->saveEditedPage();
           $this->session->set_flashdata('page_edit_success','Page Edited');
-        redirect(base_url().'admincontroller/pages');
+        redirect(base_url().'neko-admin/pages');
       }
 
 
@@ -354,7 +354,7 @@ public function editpage($page){
           $html="<h3><span class='glyphicon glyphicon-info-sign'></span>&nbsp; ".$row->page_name."</h3>";
           $html.="<h4><span class='glyphicon glyphicon-road'></span> Page URL: ".anchor("pages/section/".$row->page_slug,'')."</h4>";
           $html.="<div class='main'>Description: ".$row->page_description."</div>";
-          $html.="<p><a href='". base_url()."admincontroller/editpage/".$row->page_slug."'><span class='glyphicon glyphicon-edit'></span> Edit Page</a> | <a  data-id='$row->page_slug' title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete Page</a></p>";
+          $html.="<p><a href='". base_url()."neko-admin/editpage/".$row->page_slug."'><span class='glyphicon glyphicon-edit'></span> Edit Page</a> | <a  data-id='$row->page_slug' title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete Page</a></p>";
           echo $html;
         endforeach;
     }
@@ -370,7 +370,7 @@ public function pagedefaultsearch(){
           $html="<h3><span class='glyphicon glyphicon-info-sign'></span>&nbsp; ".$row->page_name."</h3>";
           $html.="<h4><span class='glyphicon glyphicon-road'></span> Page URL: ".anchor("pages/section/".$row->page_slug,'')."</h4>";
           $html.="<div class='main'>Description: ".$row->page_description."</div>";
-          $html.="<p><a href='". base_url()."admincontroller/editpage/".$row->page_slug."'><span class='glyphicon glyphicon-edit'></span> Edit Page</a> | <a  data-id='$row->page_slug' title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete Page</a></p>";
+          $html.="<p><a href='". base_url()."neko-admin/editpage/".$row->page_slug."'><span class='glyphicon glyphicon-edit'></span> Edit Page</a> | <a  data-id='$row->page_slug' title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete Page</a></p>";
           echo $html;
         endforeach;
 }
@@ -397,7 +397,7 @@ public function pagedefaultsearch(){
           $html="<h3><span class='glyphicon glyphicon-info-sign'></span>&nbsp; ".$row->title."</h3>";
           $html.=" <strong><span class='glyphicon glyphicon-folder-open'></span>&nbsp; Parent Category: </strong><p>$row->parent_category</p>";
           $html.="<div class='main'>".$content."</div>";
-          $html.="<p><a href='".base_url()."admincontroller/view/".$row->slug."'><span class='glyphicon glyphicon-eye-open'></span> View article</a> | <a href=".base_url()."admincontroller/edit/".$row->slug."><span class='glyphicon glyphicon-edit'></span> Edit article</a> | <a data-id=".$row->slug." title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete article</a></p>
+          $html.="<p><a href='".base_url()."neko-admin/view/".$row->slug."'><span class='glyphicon glyphicon-eye-open'></span> View article</a> | <a href=".base_url()."neko-admin/edit/".$row->slug."><span class='glyphicon glyphicon-edit'></span> Edit article</a> | <a data-id=".$row->slug." title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete article</a></p>
           <hr>";
           echo $html;
         endforeach;
@@ -421,7 +421,7 @@ public function defaultsearch(){
           $html="<h3><span class='glyphicon glyphicon-info-sign'></span>&nbsp;".$row->title."</h3>";
           $html.=" <strong><span class='glyphicon glyphicon-folder-open'></span>&nbsp; Parent Category: </strong><p>$row->parent_category</p>";
           $html.="<div class='main'>".$content."</div>";
-          $html.="<p><a href='".base_url()."admincontroller/view/".$row->slug."'><span class='glyphicon glyphicon-eye-open'></span> View article</a> | <a href=".base_url()."admincontroller/edit/".$row->slug."><span class='glyphicon glyphicon-edit'></span> Edit article</a> | <a data-id=".$row->slug." title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete article</a></p>
+          $html.="<p><a href='".base_url()."neko-admin/view/".$row->slug."'><span class='glyphicon glyphicon-eye-open'></span> View article</a> | <a href=".base_url()."neko-admin/edit/".$row->slug."><span class='glyphicon glyphicon-edit'></span> Edit article</a> | <a data-id=".$row->slug." title='' class='open-DeleteDialog' href='#deleteDialog'><span class='glyphicon glyphicon-trash'></span> Delete article</a></p>
           <hr>";
           echo $html;
         endforeach;
@@ -471,6 +471,20 @@ public function uploadPhoto($source_file,$file_name,$project_url){
 }
 
 
+public function users(){
+
+            $data['page_title']="Dashboard &raquo; Users";
+            $data['page_name']="dashboard";
+            $data['message_count']=$this->adminmodel->unread_message_count();
+            $data['visitor_count']=$this->adminmodel->countTotalVisitors();
+            $data['post_count']=$this->adminmodel->record_count();
+            $data['userslist']=$this->adminmodel->getUserList();
+            $this->load->view('tpl/header',$data);
+            $this->load->view('tpl/sidebar');
+            $this->load->view('admin_users',$data);
+            $this->load->view('tpl/footer',$data);
+}
+
 
 public function siteinfo(){
 
@@ -500,12 +514,12 @@ if($this->form_validation->run()===FALSE){
     $this->adminmodel->updatesiteInfo(1);
     $this->uploadPhoto($_FILES['imgfile']['tmp_name'],$_FILES['imgfile']['name'],base_url());
  $this->session->set_flashdata('changes1','Changes has been saved.');
- redirect(base_url().'admincontroller/siteinfo');
+ redirect(base_url().'neko-admin/siteinfo');
   }else{
     $this->uploadPhoto($_FILES['imgfile']['tmp_name'],$_FILES['imgfile']['name'],base_url());
     $this->adminmodel->updatesiteInfo(0);
  $this->session->set_flashdata('changes2','Please Log in again with your new password...');
- redirect(base_url().'admincontroller/logout');
+ redirect(base_url().'neko-admin/logout');
   }
 }
 
@@ -514,7 +528,7 @@ if($this->form_validation->run()===FALSE){
 public function showmessage($msgid){
   if(empty($msgid))
 {
-redirect(base_url().'admincontroller/inbox');
+redirect(base_url().'neko-admin/inbox');
 }
 else{
           if($this->adminmodel->viewmsg($msgid)!=NULL){
@@ -527,7 +541,7 @@ else{
           $this->load->view('admin_viewmessage',$data);
           $this->load->view('tpl/footer',$data);
           }else{
-             redirect(base_url().'admincontroller/inbox');
+             redirect(base_url().'neko-admin/inbox');
           }
 }
 }
@@ -580,17 +594,17 @@ public function emailPassword($destinationEmail,$newPass){
 
 public  function deletearticle($slug){
     $this->adminmodel->deletenews($slug);
-    redirect(base_url().'admincontroller/posts');
+    redirect(base_url().'neko-admin/posts');
 }
 
 public function deletemessage($msgid){
   $this->adminmodel->delete_selected_message($msgid);
   $this->session->set_flashdata('msgdelete_success','Message Succesfully Deleted');
-  redirect(base_url().'admincontroller/inbox');
+  redirect(base_url().'neko-admin/inbox');
 }
 public function deletepage($slug){
     $this->adminmodel->delete_selected_page($slug);
-    redirect(base_url().'admincontroller/pages');
+    redirect(base_url().'neko-admin/pages');
 
 }
 

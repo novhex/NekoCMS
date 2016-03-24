@@ -49,7 +49,7 @@ class Pages extends CI_Controller{
            $this->load->view('mainui/tpl_home/header',$this->page_info);
            $this->load->view('mainui/tpl_home/sidebar',$this->pageLinks);
            $this->load->view('mainui/home',$this->page_info);
-           $this->load->view('mainui/tpl_home/footer');
+           $this->load->view('mainui/tpl_home/footer',$this->page_info['page_owner']);
     }
 
 
@@ -71,7 +71,7 @@ class Pages extends CI_Controller{
         $this->load->view('mainui/tpl_home/header_article',$this->page_info);
         $this->load->view('mainui/tpl_home/sidebar',$this->pageLinks);
         $this->load->view('mainui/article',$this->article);
-        $this->load->view('mainui/tpl_home/footer');
+        $this->load->view('mainui/tpl_home/footer',$this->page_info['page_owner']);
 
      }
      else{
@@ -119,7 +119,7 @@ class Pages extends CI_Controller{
            $this->load->view('mainui/tpl_home/sidebar',$this->pageLinks);
            $this->sectionPosts['categ_news']=$this->pagesmodel->allpost_from_category($pageSlug,$offset,5);
            $this->load->view('mainui/section',$this->sectionPosts);
-           $this->load->view('mainui/tpl_home/footer',$this->page_info);
+           $this->load->view('mainui/tpl_home/footer',$this->page_info['page_owner']);
         }else{
             redirect('pages/index');
         }
@@ -139,6 +139,7 @@ class Pages extends CI_Controller{
         $this->form_validation->set_rules('emailAddress','Email Address','required|trim');
         $this->form_validation->set_rules('visitorMessage','Vistor Message','required|trim|max_length[160]');
         $this->form_validation->set_rules('captcha','Captcha','required|trim');
+        $this->form_validation->set_error_delimiters("<p style='color:red;'>* ","</p>");
 
         if ($this->form_validation->run() === FALSE)
         {
@@ -149,23 +150,24 @@ class Pages extends CI_Controller{
                   $this->load->view('mainui/tpl_home/header',$this->page_info);
                   $this->load->view('mainui/tpl_home/sidebar',$this->pageLinks);
                   $this->load->view('mainui/contact',$cap);
-                  $this->load->view('mainui/tpl_home/footer');
+                  $this->load->view('mainui/tpl_home/footer',$this->page_info['page_owner']);
 
         }else {
         //submit form hehe
           if($this->pagesmodel->submitcontactform()===TRUE){
                   $this->session->set_flashdata('form_submission_success','Message Submitted! Thank You :-)');
-                  redirect(base_url().'pages/index');
+                  redirect(base_url().'pages/contactus');
+            
           }else{
                   $this->session->set_flashdata('form_submission_error','Invalid captcha. Message was not submitted');
-                  redirect(base_url().'pages/index');
+                  redirect(base_url().'pages/contactus');
+            
           }
         }
 
 }
 
-public function captchaGenerator()
-            {
+public function captchaGenerator(){
             $vals = array(
 
                     'img_path'      => './_tmp/',
@@ -207,46 +209,5 @@ public function captchaGenerator()
                           	return 	$randword;
               }
 
-          public function themeselection(){
-            $theme=$this->input->post('cbtheme');
 
-              if($_SESSION['usrtheme']==''){
-                $_SESSION['usrtheme']="custom_theme/default.css";
-              }
-              switch($theme){
-
-                case 'Purple Theme':
-                    $_SESSION['usrtheme']="custom_theme/bayolet.css";
-                    redirect(base_url());
-                break;
-
-                case 'Orange Theme':
-                    $_SESSION['usrtheme']="custom_theme/oh-range.css";
-                    redirect(base_url());
-                break;
-
-                case 'Red Theme':
-                    $_SESSION['usrtheme']="custom_theme/ree-d.css";
-                    redirect(base_url());
-                break;
-
-                case 'Maroon Theme':
-                    $_SESSION['usrtheme']="custom_theme/mah-ron.css";
-                    redirect(base_url());
-                break;
-
-                case 'Facebook Like':
-                    $_SESSION['usrtheme']="custom_theme/fb-like.css";
-                    redirect(base_url());
-                break;
-                  case 'Default Theme':
-                      $_SESSION['usrtheme']="custom_theme/default.css";
-                      redirect(base_url());
-                  break;
-
-                default:
-                      redirect(base_url());
-                break;
-              }
-          }
 }

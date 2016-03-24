@@ -5,7 +5,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
         <div class="row">
             <ol class="breadcrumb">
-                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="<?php echo base_url('neko-admin/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
                 <li class="active">Blog List</li>
             </ol>
         </div><!--/.row-->
@@ -70,7 +70,7 @@
 
         </div>
 
-        <p><a href='<?php echo base_url().'admincontroller/view/'.$news_item['slug'] ?>'><span class='glyphicon glyphicon-eye-open'></span> View article</a> | <a href='<?php  echo base_url().'admincontroller/edit/'.$news_item['slug'] ?>'><span class='glyphicon glyphicon-edit'></span> Edit article</a> | <a  data-id="<?php echo $news_item['slug'];?>" title="" class="deletepost" href="#"><span class="glyphicon glyphicon-trash"></span> Delete article</a></p>
+        <p><a href='<?php echo base_url().'neko-admin/view/'.$news_item['slug'] ?>'><span class='glyphicon glyphicon-eye-open'></span> View article</a> | <a href='<?php  echo base_url().'neko-admin/edit/'.$news_item['slug'] ?>'><span class='glyphicon glyphicon-edit'></span> Edit article</a> | <a  data-id="<?php echo $news_item['slug'];?>" title="" class="deletepost" href="#"><span class="glyphicon glyphicon-trash"></span> Delete article</a></p>
 <hr>
 <?php endforeach ?>
 
@@ -97,7 +97,7 @@ function ajaxSearch() {
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('admincontroller/defaultsearch'); ?>",
+                    url: "<?php echo base_url('neko-admin/defaultsearch'); ?>",
                     data: post_data,
                     success: function(data) {
                         // return success
@@ -118,7 +118,7 @@ function ajaxSearch() {
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('admincontroller/autocomplete'); ?>",
+                    url: "<?php echo base_url('neko-admin/autocomplete'); ?>",
                     data: post_data,
                     success: function(data) {
                         // return success
@@ -146,7 +146,7 @@ $(document).ready(function(){
 
             bootbox.confirm("Are you sure you want to delete this blog?",function(x){
                 if(x==true){
-                    window.location="<?php  echo base_url('admincontroller/deletearticle');?>"+"/"+postid;
+                    window.location="<?php  echo base_url('neko-admin/deletearticle');?>"+"/"+postid;
                 }
             });
     });

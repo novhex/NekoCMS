@@ -1,16 +1,22 @@
-<!-- Static navbar -->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                        <?php  foreach($nav_links as $links){ 
+                            
+                         ?>
+                            
+                            <li><a href="<?php echo base_url('section').'/'.$links['page_slug'];?>"><?php echo $links['page_name']; ?></a></li>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
+                        <?php }?>
+                            <li><a href="<?php echo base_url('contactus');?>">Contact</a></li>
 
-        <?php
-                    //var_dump($nav_links);
-                        foreach($nav_links as $links){
-                             echo "<li><a href='".base_url()."pages/section/".$links['page_slug']."'><span class='glyphicon glyphicon-tag'></span> ".$links['page_name']."</a></li>";
-                        }
-                    ?>
-                    <li><a href="<?php echo base_url()."pages/contactus"?>"><span class='glyphicon glyphicon-tag'></span> Contact</a></li>
-</ul>
-    </div>
-</div>
-</nav>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>

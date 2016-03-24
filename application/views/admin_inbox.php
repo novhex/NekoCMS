@@ -5,7 +5,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
         <div class="row">
             <ol class="breadcrumb">
-                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="<?php echo base_url('neko-admin/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
                 <li class="active">Inbox</li>
             </ol>
         </div><!--/.row-->
@@ -58,7 +58,7 @@
                           }else{
                           echo "<td> <span class='label label-warning'>Unread</span></td>";
                           }
-    echo "<td><a  data-id='$messageLists[msgID]' title='' class='deletemsg' href='#'><span class='glyphicon glyphicon-trash'></span> Delete</a> | <a id='viewMsg' href='".base_url()."admincontroller/showmessage/$messageLists[msgID]'><span class='glyphicon glyphicon-zoom-in'></span> View</a></td>";
+    echo "<td><a  data-id='$messageLists[msgID]' title='' class='deletemsg' href='#'><span class='glyphicon glyphicon-trash'></span> Delete</a> | <a id='viewMsg' href='".base_url()."neko-admin/showmessage/$messageLists[msgID]'><span class='glyphicon glyphicon-zoom-in'></span> View</a></td>";
                           echo "</tr>";
                         endforeach;
 
@@ -91,7 +91,7 @@ $(document).ready(function(){
 
        bootbox.confirm('Are you sure you want to delete this message',function(x){
         if(x==true){
-          window.location="<?php echo base_url('admincontroller/deletemessage');?>"+"/"+msgid;
+          window.location="<?php echo base_url('neko-admin/deletemessage');?>"+"/"+msgid;
         }
     });
 

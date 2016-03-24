@@ -5,25 +5,41 @@
 
     }
  ?>
-    <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1><span class='glyphicon glyphicon-zoom-in'></span> Viewing Message</h1>
- <hr>
 
-        <h3><span class='glyphicon glyphicon-comment'></span> From: <?php echo $msg_content['from']; ?></h3>
-       <strong><span class='glyphicon glyphicon-time'></span> Date recieved: </strong><?php echo $msg_content['date_recieved']; ?>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">           
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="<?php echo base_url('admincontroller/index'); ?>"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Inbox</li>
+            </ol>
+        </div><!--/.row-->
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Message Details</h1>
+            </div>
+        </div><!--/.row-->
+                
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Message Body</div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                          <h3><span class='glyphicon glyphicon-comment'></span> From: <?php echo $msg_content['from']; ?></h3>
+       <strong><span class='glyphicon glyphicon-time'></span> Date recieved: </strong><?php echo date('F  j, Y',strtotime($msg_content['date_recieved'])); ?>
        <br>
-        <strong><span class='glyphicon glyphicon-sunglasses'></span> IP Address: </strong><?php echo $msg_content['ip_address']; ?>
-        <div class="main">
-            <hr>
-                <?php echo $msg_content['body']; ?>
-        </div>
-        <hr>
-                        <a href="<?php echo base_url()?>admincontroller/inbox"  style="width: 190px; height: 40px;" class="btn btn-success"><span class='glyphicon glyphicon-arrow-left'></span><strong> Return to inbox</strong><a>
-                            <a href='#menu-toggle' class='pull-right btn btn-success'  style='width: 175px; height: 40px;' id='menu-toggle'><span class='glyphicon glyphicon-arrow-left'></span>&nbsp; <strong>Hide/Show Sidebar</strong></a>
+        <strong><span class='glyphicon glyphicon-info'></span> IP Address: </strong><?php echo $msg_content['ip_address']; ?>
+            <br>
+            <br>
+               <p> <?php echo $msg_content['body']; ?></p>
+
                     </div>
                 </div>
-            </div>
-        </div>
+            </div><!-- /.col-->
+        </div><!-- /.row -->
+        
+    </div><!--/.main-->

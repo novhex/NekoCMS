@@ -196,6 +196,14 @@ class AdminModel extends CI_Model{
    }
    }
 
+   public function getUserList(){
+      $query = $this->db->select("*");
+      $query = $this->db->from("users");
+      $query = $this->db->get();
+
+      return $query->result_array();
+   }
+
     public function viewnews($slug){
           if($this->hasCurrentLoggedIn()===FALSE){
         redirect(base_url().'admincontroller/index');
