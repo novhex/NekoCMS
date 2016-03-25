@@ -80,7 +80,7 @@
                     <div class="panel-body">
                     <p> Developed by: <a target="_blank" href="https://fb.com/novhz.emo94"> Novi </a></p>
                     <p> Email : <a blank="_blank" href="mailto:kel_novi@mikelnoviblog.hol.es">kel_novi@mikelnoviblog.hol.es</a></p>
-                    <p> Website: <a href="_blank" href="http://mikelnoviblog.hol.es">http://mikelnoviblog.hol.es</a>
+                    <p> Website: <a target="_blank" href="http://mikelnoviblog.hol.es">http://mikelnoviblog.hol.es</a>
                     </div>
                 </div>
             </div>
