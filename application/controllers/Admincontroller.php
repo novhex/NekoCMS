@@ -147,11 +147,48 @@ public function inbox($offset=0){
 
 }
 
+public function comments(){
+
+  
+
+
+            $data['page_title']="Dashboard &raquo; Blog Comments";
+            $data['page_name']="dashboard";
+            $data['comments']=$this->adminmodel->getBlogComments();
+            $this->load->view('tpl/header',$data);
+            $this->load->view('tpl/sidebar');
+            $this->load->view('admin_blogcomments',$data);
+            $this->load->view('tpl/footer',$data);
+
+
+
+}
+
+public function commentaction(){
+
+   if($this->adminmodel->hasCurrentLoggedIn()==TRUE){
+          
+          $action = $this->input->post('comment_action');
+          $comment_id =$this->input->post('comment_id');
+
+          echo $this->adminmodel->comment_action($action,$comment_id);
+
+    }else{
+      
+           redirect(base_url().'neko-admin/index');
+    }
+
+
+}
+
 public function dashboard(){
+
+
             $data['page_title']="Dashboard &raquo; Home";
             $data['page_name']="dashboard";
             $data['message_count']=$this->adminmodel->unread_message_count();
             $data['visitor_count']=$this->adminmodel->countTotalVisitors();
+            $data['comment_count'] =$this->adminmodel->countTotalComments();
             $data['post_count']=$this->adminmodel->record_count();
             $this->load->view('tpl/header',$data);
             $this->load->view('tpl/sidebar');
@@ -433,6 +470,7 @@ public function siteinfoValidationRules($type){
       $this->form_validation->set_rules('txt_site_owner','Site Owner','required|trim|max_length[45]');
       $this->form_validation->set_rules('txt_site_title','Site Name','required|trim|max_length[45]');
       $this->form_validation->set_rules('site_meta','Site Meta','required|trim|max_length[160]');
+      $this->form_validation->set_rules('site_metakw','Site Meta Keywords','required|trim');
       $this->form_validation->set_rules('txtnewuser','Username','required|trim|max_length[45]');
       $this->form_validation->set_rules('txtnewnick','Nickname','required|trim|max_length[45]');
       $this->form_validation->set_rules('txtnewbio','Bio','required|trim|max_length[100]');
@@ -441,6 +479,7 @@ public function siteinfoValidationRules($type){
       $this->form_validation->set_rules('txt_site_owner','Site Owner','required|trim|max_length[45]');
       $this->form_validation->set_rules('txt_site_title','Site Name','required|trim|max_length[45]');
       $this->form_validation->set_rules('site_meta','Site Meta','required|trim|max_length[160]');
+      $this->form_validation->set_rules('site_metakw','Site Meta Keywords','required|trim');
       $this->form_validation->set_rules('txtnewpass', 'Password', 'trim|required|min_length[6]');
       $this->form_validation->set_rules('txtnewuser','Username','required|trim|max_length[45]');
       $this->form_validation->set_rules('txtnewnick','Nickname','required|trim|max_length[45]');
@@ -471,6 +510,8 @@ public function uploadPhoto($source_file,$file_name,$project_url){
 }
 
 
+/*
+will be available next update
 public function users(){
 
             $data['page_title']="Dashboard &raquo; Users";
@@ -484,6 +525,7 @@ public function users(){
             $this->load->view('admin_users',$data);
             $this->load->view('tpl/footer',$data);
 }
+*/
 
 
 public function siteinfo(){
@@ -503,6 +545,7 @@ if($this->form_validation->run()===FALSE){
   $data['site_meta']=$this->adminmodel->getsite_meta_description();
   $data['site_owner']=$this->adminmodel->getsite_owner();
   $data['site_title']=$this->adminmodel-> getsite_title();
+  $data['site_metakw'] = $this->adminmodel->getsite_meta_keywords();
   $data['logged_user']=$_SESSION['username'];
   $data['message_count']=$this->adminmodel->unread_message_count();
   $this->load->view('tpl/header',$data);
@@ -554,7 +597,7 @@ $this->form_validation->set_rules('usermail','Email','required|trim');
 if($this->form_validation->run()===FALSE){
   $data['page_title']="Password Recovery Wizard";
    $data['page_name']="forgotpass_page";
-   $this->load->view('tpl/header',$data);
+
    $this->load->view('admin_forgotpassword');
    $this->load->view('tpl/footer',$data);
 }else{

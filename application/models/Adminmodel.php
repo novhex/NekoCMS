@@ -40,6 +40,26 @@ class AdminModel extends CI_Model{
 
     }
 
+    public function comment_action($action,$comment_id){
+        if($action==1){
+
+            $data =array('is_approved'=>1);
+            $this->db->where('news_comments.c_id',$comment_id);
+            return $this->db->update('news_comments',$data);
+        }
+        else if($action==0){
+
+            $data =array('is_approved'=>0);
+            $this->db->where('news_comments.c_id',$comment_id);
+            return $this->db->update('news_comments',$data);
+        }
+        else if($action==2){
+          $this->db->where('news_comments.c_id',$comment_id);
+          return $this->db->delete('news_comments');
+        }
+
+    }
+
     public function fetchUserInfo($userName){
 
      $query = $this->db->query("SELECT * from users where username='$userName'");
@@ -58,11 +78,24 @@ class AdminModel extends CI_Model{
 
     public function get_categories(){
           if($this->hasCurrentLoggedIn()===FALSE){
-          redirect(base_url().'admincontroller/index');
+          redirect(base_url().'neko-admin/index');
 }
 
         $query= $this->db->get('pages');
         return $query->result_array();
+    }
+
+
+    public function getBlogComments(){
+
+      if($this->hasCurrentLoggedIn()===FALSE){
+        redirect(base_url().'neko-admin/index');
+      }else{
+          $query = $this->db->join('news','news.id = news_comments.news_id ','INNER');
+          $query = $this->db->get("news_comments");
+          return $query->result_array();
+      }
+
     }
 
     public function hasCurrentLoggedIn(){
@@ -77,7 +110,7 @@ class AdminModel extends CI_Model{
 
    public function  allnews($cfg_page,$offset){
   if($this->hasCurrentLoggedIn()===FALSE){
-    redirect(base_url().'admincontroller/index');
+    redirect(base_url().'neko-admin/index');
 }
 
     $query=$this->db->order_by("id", "DESC");
@@ -89,7 +122,7 @@ class AdminModel extends CI_Model{
 
    public function  allpages($cfg_page,$offset){
   if($this->hasCurrentLoggedIn()===FALSE){
-      redirect(base_url().'admincontroller/index');
+      redirect(base_url().'neko-admin/index');
 }
 
     $query=$this->db->order_by("id", "desc");
@@ -102,7 +135,7 @@ class AdminModel extends CI_Model{
     public function page_get_autocomplete($search_data) {
 
      if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
    }
            $this->db->select('*');
            $this->db->like('page_name', $search_data);
@@ -114,7 +147,7 @@ class AdminModel extends CI_Model{
     public function page_get_defaultsearch(){
 
      if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
    }
            $this->db->select('*');
            return $this->db->get('pages');
@@ -123,7 +156,7 @@ class AdminModel extends CI_Model{
     public function get_autocomplete($search_data) {
 
      if($this->hasCurrentLoggedIn()===FALSE){
-         redirect(base_url().'admincontroller/index');
+         redirect(base_url().'neko-admin/index');
    }
            $this->db->select('*');
            $this->db->like('title', $search_data);
@@ -134,7 +167,7 @@ class AdminModel extends CI_Model{
     public function get_defaultsearch(){
 
       if($this->hasCurrentLoggedIn()===FALSE){
-         redirect(base_url().'admincontroller/index');
+         redirect(base_url().'neko-admin/index');
     }
             $this->db->select('*');
             return $this->db->get('news');
@@ -143,7 +176,7 @@ class AdminModel extends CI_Model{
     public function fetch_unread_messages($cfg_page,$offset){
 
       if($this->hasCurrentLoggedIn()===FALSE){
-         redirect(base_url().'admincontroller/index');
+         redirect(base_url().'neko-admin/index');
     }
 
     $query=$this->db->order_by("msgID", "DESC");
@@ -162,14 +195,14 @@ class AdminModel extends CI_Model{
 
    public function record_count() {
          if($this->hasCurrentLoggedIn()===FALSE){
-    redirect(base_url().'admincontroller/index');
+    redirect(base_url().'neko-admin/index');
       }
         return $this->db->count_all("news");
     }
 
     public function unread_message_count(){
       if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
    }
    $this->db->where('visitor_messages.is_read', 'N');
     $this->db->from('visitor_messages');
@@ -179,7 +212,7 @@ class AdminModel extends CI_Model{
     public function set_news()
     {
           if($this->hasCurrentLoggedIn()===FALSE){
-     redirect(base_url().'admincontroller/index');
+     redirect(base_url().'neko-admin/index');
 }
     $slug = url_title($this->input->post('txt_title'), 'dash', TRUE);
 
@@ -206,7 +239,7 @@ class AdminModel extends CI_Model{
 
     public function viewnews($slug){
           if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
     }
 
 
@@ -222,7 +255,7 @@ class AdminModel extends CI_Model{
 
   public function viewmsg($msgid){
       if($this->hasCurrentLoggedIn()===FALSE){
-    redirect(base_url().'admincontroller/index');
+    redirect(base_url().'neko-admin/index');
     }
 
 
@@ -241,7 +274,7 @@ class AdminModel extends CI_Model{
     public function fetchNewsToEdit($slug){
       if($this->hasCurrentLoggedIn()===FALSE)
         {
-           redirect(base_url().'admincontroller/index');
+           redirect(base_url().'neko-admin/index');
         }else {
         $query = $this->db->get_where('news', array('slug' => $slug));
             if($query->row_array()==NULL){
@@ -255,7 +288,7 @@ class AdminModel extends CI_Model{
     public function fetchPageToEdit($page){
          if($this->hasCurrentLoggedIn()===FALSE)
         {
-          redirect(base_url().'admincontroller/index');
+          redirect(base_url().'neko-admin/index');
         }else {
         $query = $this->db->get_where('pages', array('page_slug' => $page));
             if($query->row_array()==NULL){
@@ -269,7 +302,7 @@ class AdminModel extends CI_Model{
 
     public function saveEditedNews() {
           if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
     }
 
      $slug = url_title($this->input->post('txt_title'), 'dash', TRUE);
@@ -298,7 +331,7 @@ class AdminModel extends CI_Model{
 
   public function saveEditedPage(){
            if($this->hasCurrentLoggedIn()===FALSE){
-         redirect(base_url().'admincontroller/index');
+         redirect(base_url().'neko-admin/index');
     }
 
       $slug=url_title($this->input->post('txt_pagetitle'),'dash',TRUE);
@@ -315,7 +348,7 @@ class AdminModel extends CI_Model{
 
 public function updatesiteInfo($val){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   if($val===1){
     $this->updateBlogTitle($this->input->post('txt_site_title'));
@@ -325,10 +358,12 @@ public function updatesiteInfo($val){
     $this->changeNick($this->input->post('txtnewnick'));
     $this->changeBio($this->input->post('txtnewbio'));
     $this->changeEmail($this->input->post('txtnewmail'));
+    $this->updateBlogMetaKw($this->input->post('site_metakw'));
     $this->reloadSession($this->input->post('txtnewuser'),$this->input->post('txtnewnick'),$this->input->post('txtnewbio'),$this->input->post('txtnewmail'));
   }else{
     $this->updateBlogTitle($this->input->post('txt_site_title'));
     $this->updateBlogMeta($this->input->post('site_meta'));
+    $this->updateBlogMetaKw($this->input->post('site_metakw'));
     $this->updateBlogOwner($this->input->post('txt_site_owner'));
     $this->changeUsername($this->input->post('txtnewuser'));
     $this->changePassword($this->input->post('txtnewpass'));
@@ -343,7 +378,7 @@ public function updatesiteInfo($val){
 
 public function updateUserPic($path){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $this->resetDisplayPhotoSession($path);
   $data=array(
@@ -354,9 +389,11 @@ public function updateUserPic($path){
   }
 }
 
+
+
 public function resetDisplayPhotoSession($newpath){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   unset($_SESSION['display_photo']);
     $_SESSION['display_photo']=$newpath;
@@ -365,7 +402,7 @@ public function resetDisplayPhotoSession($newpath){
 
 public function reloadSession($newSessionName,$newSessionNickname,$newBio,$newEmail){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   unset($_SESSION['username']);
   unset($_SESSION['nickname']);
@@ -382,7 +419,7 @@ public function reloadSession($newSessionName,$newSessionNickname,$newBio,$newEm
 
 public function changeBio($new_val){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $data=array(
     'short_motto'=>$new_val
@@ -394,7 +431,7 @@ public function changeBio($new_val){
 
 public function changeEmail($new_val){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $data=array(
     'email'=>$new_val
@@ -406,7 +443,7 @@ public function changeEmail($new_val){
 
 public function changePassword($new_val){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $data=array(
     'password'=>$this->hashPassword($new_val)
@@ -419,7 +456,7 @@ public function changePassword($new_val){
 
 public function changeNick($new_val){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $data=array(
     'name'=>$new_val
@@ -431,7 +468,7 @@ public function changeNick($new_val){
 
 public function changeUsername($new_val){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $data=array(
     'username'=>$new_val
@@ -444,7 +481,7 @@ public function changeUsername($new_val){
 public function updateBlogTitle($new_val){
 
 if($this->hasCurrentLoggedIn()===FALSE){
-redirect(base_url().'admincontroller/index');
+redirect(base_url().'neko-admin/index');
 }else{
         $data=array(
           'configValue'=>$new_val
@@ -463,6 +500,13 @@ public function updateBlogMeta($new_val){
         return $this->db->update('blog_info',$data);
 }
 
+public function updateBlogMetaKw($mkw){
+         $data=array(
+          'configValue'=>$mkw
+          );
+          $this->db->where('blog_info.configID',4);
+        return $this->db->update('blog_info',$data);
+}
 
 public function updateBlogOwner($new_val){
 
@@ -475,7 +519,7 @@ public function updateBlogOwner($new_val){
 
 public function updatePageParentCategory($new_slug,$old_slug){
          if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
     }else{
     $this->db->query("UPDATE  news SET parent_category = '$new_slug' WHERE parent_category = '$old_slug'");
   }
@@ -483,7 +527,7 @@ public function updatePageParentCategory($new_slug,$old_slug){
 
 public function savepage() {
       if($this->hasCurrentLoggedIn()===FALSE){
-     redirect(base_url().'admincontroller/index');
+     redirect(base_url().'neko-admin/index');
 }
  $slug = url_title($this->input->post('txt_pagetitle'), 'dash', TRUE);
     $data=array(
@@ -500,7 +544,7 @@ public function savepage() {
 
     public function deletenews($slug){
     if($this->hasCurrentLoggedIn()===FALSE){
-        redirect(base_url().'admincontroller/index');
+        redirect(base_url().'neko-admin/index');
     }else{
     $this->db->where('news.slug',$slug);
     return $this->db->delete('news');
@@ -509,7 +553,7 @@ public function savepage() {
 
 public function delete_selected_message($id){
    if($this->hasCurrentLoggedIn()===FALSE){
-  redirect(base_url().'admincontroller/index');
+  redirect(base_url().'neko-admin/index');
 }else{
 $this->db->where('visitor_messages.msgID',$id);
 return $this->db->delete('visitor_messages');
@@ -518,7 +562,7 @@ return $this->db->delete('visitor_messages');
 
     public function delete_selected_page($slug){
        if($this->hasCurrentLoggedIn()===FALSE){
-      redirect(base_url().'admincontroller/index');
+      redirect(base_url().'neko-admin/index');
     }else{
     $this->db->where('pages.page_slug',$slug);
     return $this->db->delete('pages');
@@ -527,7 +571,7 @@ return $this->db->delete('visitor_messages');
 
   public function getsite_meta_description(){
     if($this->hasCurrentLoggedIn()===FALSE){
-   redirect(base_url().'admincontroller/index');
+   redirect(base_url().'neko-admin/index');
   }else{
   $this->db->where('blog_info.configID',2);
    $query=$this->db->get('blog_info');
@@ -535,18 +579,38 @@ return $this->db->delete('visitor_messages');
   }
   }
 
+    public function getsite_meta_keywords(){
+    if($this->hasCurrentLoggedIn()===FALSE){
+   redirect(base_url().'neko-admin/index');
+  }else{
+  $this->db->where('blog_info.configID',4);
+   $query=$this->db->get('blog_info');
+   return $query->result_array();
+  }
+  }
+
+
 public function countTotalVisitors(){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   return $this->db->count_all("visitor_count");
+}
+}
+
+public function countTotalComments(){
+
+    if($this->hasCurrentLoggedIn()===FALSE){
+ redirect(base_url().'neko-admin/index');
+}else{
+  return $this->db->count_all("news_comments");
 }
 }
 
 
 public function getsite_owner(){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
   $this->db->where('blog_info.configID',3);
  $query=$this->db->get('blog_info');
@@ -556,7 +620,7 @@ public function getsite_owner(){
 
 public function getsite_title(){
   if($this->hasCurrentLoggedIn()===FALSE){
- redirect(base_url().'admincontroller/index');
+ redirect(base_url().'neko-admin/index');
 }else{
    $this->db->where('blog_info.configID',1);
  $query=$this->db->get('blog_info');

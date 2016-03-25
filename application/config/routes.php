@@ -77,4 +77,7 @@ $route['neko-admin']='admincontroller/index';
 $route['neko-admin/deletemessage/(:num)']='admincontroller/deletemessage/$1';
 $route['neko-admin/deletearticle/(:any)']='admincontroller/deletearticle/$1';
 $route['neko-admin/users']='admincontroller/users';
+$route['neko-admin/forgotpassword']='admincontroller/forgotpassword';
+$route['neko-admin/comments'] = 'admincontroller/comments';
+$route['neko-admin/commentaction']='admincontroller/commentaction';
 $route['translate_uri_dashes'] = FALSE;

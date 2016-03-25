@@ -1,38 +1,76 @@
-<div class="container">
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Login</title>
 
+<link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
+<link href="<?php echo base_url('css/styles.css');?>" rel="stylesheet">
+<link href="<?php echo base_url('css/font-awesome/css/font-awesome.css');?>" rel="stylesheet">
 
-    </div> <!-- /container -->
-<!--login modal-->
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
 
-      </div>
-      <div class="modal-body">
-           <form action="<?php echo base_url()."admincontroller/forgotpassword"; ?>" class="form-signin" method="POST" accept-charset="utf-8">
-        <h2 class="form-signin-heading">Enter Email</h2>
-        <?php
+</head>
+
+<body>
+  
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">Log in</div>
+        <div class="panel-body">
+          <form role="form" action="<?php echo base_url('neko-admin/forgotpassword'); ?>" method="POST" accept-charset="utf-8">
+            <fieldset>
+    <?php
         if(!empty(validation_errors()))
         {
             echo "<div class='alert alert-danger'><a class='close' data-dismiss='alert'>×</a><strong>Error: </strong>".validation_errors()."</div>";
         }
         ?>
-        <p>Please enter your Email address. You will receive a new password via email.</p>
-
-        <label for="inputUsermail">User Email</label>
-        <input type="email" name="usermail" id="inputUsermail" class="form-control input-small" placeholder="User Email" />
-        <div class="checkbox">
-            <label>
-          </label>
+              <div class="form-group">
+                  <input type="email" name="usermail" id="inputUsermail" class="form-control input-small" placeholder="User Email" />
+              </div>
+           
+              <div class="checkbox">
+                <label>
+                 
+                </label>
+              </div>
+               <button class="btn  btn-success" type="submit"><span class="glyphicon glyphicon-lock"></span> &nbsp; Send New Password</button>
+              <a href="<?php echo base_url();?>" class="btn btn-success"><i class='fa fa-arrow-left'></i> Back to Main Page</a>
+            </fieldset>
+          </form>
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit"><span class="glyphicon glyphicon-lock"></span> &nbsp; Send New Password</button>
-      </form>
       </div>
-      <div class="modal-footer">
-          <p> <?php echo anchor('https://fb.com/novhz.emo94','Developed by Novi'); ?></p>
-      </div>
-  </div>
-  </div>
-</div>
+    </div><!-- /.col-->
+  </div><!-- /.row -->  
+  
+    
+
+  <script src="<?php echo base_url('js/jquery-1.11.1.min.js');?>"></script>
+  <script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
+
+  <script>
+    !function ($) {
+      $(document).on("click","ul.nav li.parent > a > span.icon", function(){      
+        $(this).find('em:first').toggleClass("glyphicon-minus");    
+      }); 
+      $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function () {
+      if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    })
+    $(window).on('resize', function () {
+      if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+  </script> 
+</body>
+
+</html>
+

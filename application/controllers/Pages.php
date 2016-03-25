@@ -25,7 +25,7 @@ class Pages extends CI_Controller{
             $this->load->database();
             $this->load->library('settings');
             $this->load->helper(array('url','captcha'));
-            $this->load->library(array('session','pagination','form_validation','user_agent'));
+            $this->load->library(array('session','pagination','form_validation','user_agent','viewercounter'));
             $this->load->model('pagesmodel');
 
     }
@@ -38,6 +38,7 @@ class Pages extends CI_Controller{
     public function index() {
            $this->getUserIP();
            $this->page_info['page_meta']=$this->pagesmodel->getsite_meta_description();
+           $this->page_info['page_metakw']=$this->pagesmodel->getsite_meta_keywords(); 
            $this->page_info['page_owner']=$this->pagesmodel->getsite_owner();
            $this->page_info['page_title']=$this->pagesmodel->getsite_title();
            $this->page_info['postcount']=$this->pagesmodel->countTotalPosts();
@@ -56,22 +57,48 @@ class Pages extends CI_Controller{
   public function article($articleSlug){
 
         if(!empty($articleSlug)){
+
         if($this->pagesmodel->getarticletoView($articleSlug)!=NULL)  {
-        $this->page_info['page_meta']=$this->pagesmodel->getsite_meta_description();
-        $this->page_info['page_owner']=$this->pagesmodel->getsite_owner();
-        $this->page_info['page_title']=$this->pagesmodel->getsite_title();
-        $this->page_info['postcount']=$this->pagesmodel->countTotalPosts();
-        $this->page_info['ownerphoto']=$this->pagesmodel->showOwnerProfile();
-        $this->page_info['sidebarlinks']=$this->pagesmodel->sidebarLinks();
-        $this->page_info['visitor_counter']=$this->pagesmodel->countTotalVisitors();
-        $this->article['article_contents']=$this->pagesmodel->getarticletoView($articleSlug);
-        $this->article['article_slug']=ucfirst(str_replace("-"," ",$articleSlug));
-        $this->pageLinks['nav_links']=$this->pagesmodel->allpages();
-        $this->page_info['slug']=ucfirst(str_replace("-"," ",$articleSlug));
-        $this->load->view('mainui/tpl_home/header_article',$this->page_info);
-        $this->load->view('mainui/tpl_home/sidebar',$this->pageLinks);
-        $this->load->view('mainui/article',$this->article);
-        $this->load->view('mainui/tpl_home/footer',$this->page_info['page_owner']);
+
+
+        $this->form_validation->set_rules('username','Name','trim|required|min_length[2]|max_length[50]');
+        $this->form_validation->set_rules('email_add','Email Address','trim|required|valid_email');
+        $this->form_validation->set_rules('comment','Comment','trim|required|min_length[2]|max_length[500]');
+        $this->form_validation->set_error_delimiters("<p style='color:red;'>* ","</p>");
+
+        if($this->form_validation->run()==FALSE){
+
+
+              $this->page_info['page_meta']=$this->pagesmodel->getsite_meta_description();
+              $this->page_info['page_metakw']=$this->pagesmodel->getsite_meta_keywords(); 
+              $this->page_info['page_owner']=$this->pagesmodel->getsite_owner();
+              $this->page_info['page_title']=$this->pagesmodel->getsite_title();
+              $this->page_info['postcount']=$this->pagesmodel->countTotalPosts();
+              $this->page_info['ownerphoto']=$this->pagesmodel->showOwnerProfile();
+              $this->page_info['sidebarlinks']=$this->pagesmodel->sidebarLinks();
+              $this->page_info['visitor_counter']=$this->pagesmodel->countTotalVisitors();
+              $this->article['article_contents']=$this->pagesmodel->getarticletoView($articleSlug);
+              $this->article['article_slug']=ucfirst(str_replace("-"," ",$articleSlug));
+              $this->pageLinks['nav_links']=$this->pagesmodel->allpages();
+              $this->page_info['slug']=ucfirst(str_replace("-"," ",$articleSlug));
+              $this->load->view('mainui/tpl_home/header_article',$this->page_info);
+              $this->load->view('mainui/tpl_home/sidebar',$this->pageLinks);
+              $this->load->view('mainui/article',$this->article);
+              $this->load->view('mainui/tpl_home/footer',$this->page_info['page_owner']);
+
+      }else{
+
+          //fire event
+
+          $response = $this->pagesmodel->savecomment($this->input->post('news_id'),
+            $this->input->post('username'),$this->input->post('email_add'),date('Y-m-d'),$this->input->post('comment'));
+
+            if($response==1){
+              $this->session->set_flashdata('comment_submitted','Your comment has been saved.');
+              redirect(base_url('article').'/'.$articleSlug);
+            }
+
+      }
 
      }
      else{
@@ -88,6 +115,7 @@ class Pages extends CI_Controller{
           $uri_segment = 4;
           $offset = $this->uri->segment($uri_segment);
           $this->page_info['page_meta']=$this->pagesmodel->getsite_meta_description();
+          $this->page_info['page_metakw']=$this->pagesmodel->getsite_meta_keywords(); 
           $this->page_info['page_owner']=$this->pagesmodel->getsite_owner();
           $this->page_info['page_title']=$this->pagesmodel->getsite_title();
           $this->page_info['page_slug']=ucfirst(str_replace("-", " ", $pageSlug));
@@ -144,6 +172,7 @@ class Pages extends CI_Controller{
         if ($this->form_validation->run() === FALSE)
         {
                   $this->page_info['page_meta']=$this->pagesmodel->getsite_meta_description();
+                  $this->page_info['page_metakw']=$this->pagesmodel->getsite_meta_keywords(); 
                   $this->page_info['page_owner']=$this->pagesmodel->getsite_owner();
                   $this->page_info['page_title']=$this->pagesmodel->getsite_title();
                   $this->pageLinks['nav_links']=$this->pagesmodel->allpages();

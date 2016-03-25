@@ -10,6 +10,7 @@
 
 <link rel="icon" href="<?php echo base_url('images/ci-icon.ico')?>">
 <link href="<?php echo base_url('css/dataTable.css');?>" rel="stylesheet">
+<link href="<?php echo base_url('css/font-awesome/css/font-awesome.css');?>" rel="stylesheet">
     
 
 
@@ -18,7 +19,7 @@
 
     <?php
      echo "<script src='".base_url()."js/jquery.min.js'></script> \n";  
-     echo "<script src='".base_url()."js/bootstrap-alert.js'></script> \n";  
+    
      ?>
          <script type="text/javascript" src="<?php echo base_url('tinymce/tinymce.min.js'); ?>"></script>
    		 <script src="<?php echo base_url('js/lumino.glyphs.js');?>"></script>

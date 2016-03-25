@@ -20,6 +20,7 @@ class PagesModel extends CI_Model{
         $this->load->library('user_agent');
     }
 
+
     public function allpages(){
 
         $query= $this->db->order_by('pages.page_description',"ASC");
@@ -45,6 +46,20 @@ class PagesModel extends CI_Model{
         }
     }
 
+    public function checkIfAlreadyViewed($IP,$articleID){
+        $query = $this->db->select("ip_address,news_id");
+        $query = $this->db->from("postview");
+        return $this->db->count_all_results();
+    }
+
+    public function incrementviews($IP,$newsID){
+      $data= array('news_id'=>$newsID,
+        'ip_address'=>$IP,
+        'date_viewed'=>date('Y-m-d')
+        );
+      return $this->db->insert('postview',$data);
+    }
+
     public function latestArticles(){
       $query= $this->db->order_by('news.date_posted',"DESC");
       $query= $this->db->get('news',3,0);
@@ -61,8 +76,30 @@ class PagesModel extends CI_Model{
       return $this->db->count_all("news");
     }
 
+
+   public function countpost_from_category($parentSlug){
+        $this->db->from('news');
+        $this->db->where('news.parent_category',$parentSlug);
+        $db_results=$this->db->get();
+        $results=$db_results->result();
+        $numrows=$db_results->num_rows();
+        return $numrows;
+   }
+
     public function countTotalVisitors(){
       return $this->db->count_all("visitor_count");
+    }
+
+    public function savecomment($newsID,$name,$email,$date,$comment){
+        $data = array(
+          'news_id'=>$newsID,
+          'user_name'=>$name,
+          'user_email'=>$email,
+          'comment_date'=>$date,
+          'comment'=>$comment,
+          'is_approved'=>0
+          );
+        return $this->db->insert('news_comments',$data);
     }
 
     public function showOwnerProfile(){
@@ -89,20 +126,19 @@ class PagesModel extends CI_Model{
 
    }
 
-   public function countpost_from_category($parentSlug){
-        $this->db->from('news');
-        $this->db->where('news.parent_category',$parentSlug);
-        $db_results=$this->db->get();
-        $results=$db_results->result();
-        $numrows=$db_results->num_rows();
-        return $numrows;
-   }
 
    public function getsite_meta_description(){
    $this->db->where('blog_info.configID',2);
     $query=$this->db->get('blog_info');
     return $query->result_array();
 
+   }
+
+   public function getsite_meta_keywords(){
+    
+    $this->db->where('blog_info.configID',4);
+    $query=$this->db->get('blog_info');
+    return $query->result_array();
    }
 
    public function getsite_owner(){
@@ -115,6 +151,15 @@ class PagesModel extends CI_Model{
       $this->db->where('blog_info.configID',1);
     $query=$this->db->get('blog_info');
     return $query->result_array();
+   }
+
+   public function getNewsComments($newsid){
+
+      $query = $this->db->where('news_comments.news_id',$newsid);
+      $query = $this->db->where('news_comments.is_approved',1);
+      $query = $this->db->get('news_comments');
+     
+      return $query->result_array();
    }
 
    public function submitcontactform(){

@@ -56,12 +56,22 @@
                                        <input value='<?php echo $siteowner['configValue']; ?>' id='txt_site_owner' type='text' class='form-control' name='txt_site_owner' placeholder='Site Owner'/>
                                      <?php endforeach; ?>
                                    </div>
-                                   </div>
+       </div>
+
        <div class='form-group'>
                        <div class='col-lg-4'>
                            <p><span class='glyphicon glyphicon-tag'></span>&nbsp; Site Description *</p>
                             <?php foreach($site_meta as $sitemeta): ?>
                               <textarea style="" name="site_meta" placeholder="Add some description of your site" class="form-control"><?php echo $sitemeta['configValue'];?></textarea>
+                            <?php endforeach; ?>
+                       </div>
+                   </div>
+
+                      <div class='form-group'>
+                       <div class='col-lg-4'>
+                           <p><span class='glyphicon glyphicon-eye-open'></span>&nbsp; Site Meta Keywords (keywords must be separeted by comma) *</p>
+                            <?php foreach($site_metakw as $sitemetakw): ?>
+                              <textarea style="" name="site_metakw" placeholder="Add some meta keywords of your site" class="form-control"><?php echo $sitemetakw['configValue'];?></textarea>
                             <?php endforeach; ?>
                        </div>
                    </div>

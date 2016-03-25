@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2015 at 05:47 AM
+-- Generation Time: Mar 25, 2016 at 06:13 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -31,16 +31,17 @@ CREATE TABLE IF NOT EXISTS `blog_info` (
   `configDesc` varchar(45) NOT NULL,
   `configValue` text NOT NULL,
   PRIMARY KEY (`configID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `blog_info`
 --
 
 INSERT INTO `blog_info` (`configID`, `configDesc`, `configValue`) VALUES
-(1, 'blog_title', 'Neko! CMS'),
-(2, 'blog_meta_desc', 'Neko CMS using codeigniter framework'),
-(3, 'blog_owner', 'Neko :)');
+(1, 'blog_title', 'Kel Novi Blog'),
+(2, 'blog_meta_desc', 'Just another nerd from planet called Internet'),
+(3, 'blog_owner', 'Novi'),
+(4, 'blog_meta_keywords', 'NekoCMS,NekoCms,Meow');
 
 -- --------------------------------------------------------
 
@@ -78,6 +79,23 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `news_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `news_comments` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `news_id` int(11) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `comment_date` date NOT NULL,
+  `comment` text NOT NULL,
+  `is_approved` varchar(1) NOT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pages`
 --
 
@@ -87,6 +105,20 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `page_description` varchar(200) NOT NULL,
   `page_slug` varchar(255) NOT NULL,
   `date_added` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `postview`
+--
+
+CREATE TABLE IF NOT EXISTS `postview` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `news_id` int(11) NOT NULL,
+  `ip_address` varchar(15) NOT NULL,
+  `date_viewed` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -112,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `profile_photo`, `short_motto`, `email`) VALUES
-(1, 'noviweb', '5cc23fff3fda8a0e69f22f6e60e19cbd0a4353af', 'Novi Maluenda', '', '', '');
+(1, 'noviweb', '5cc23fff3fda8a0e69f22f6e60e19cbd0a4353af', 'MuningKittenCat', 'http://localhost/ci_production/images/ceab5b19ebf8c105996245a208d566ed22015_10151274652743197_218860783_n.jpg', 'I love you', 'novhex94@gmail.com');
 
 -- --------------------------------------------------------
 

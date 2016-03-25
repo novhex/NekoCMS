@@ -16,9 +16,9 @@
           <div class="col-md-12">
               <h2> <?php echo $categNews['title']; ?></h2>
 
-                              <p><span class="glyphicon glyphicon-calendar"></span> Date Posted:  <?php echo date('F  j , Y',strtotime($categNews['date_posted'])); ?></p>
+                <p><span class="glyphicon glyphicon-calendar"></span> Date Posted:  <?php echo date('F  j , Y',strtotime($categNews['date_posted'])); ?></p>
                 <p><span class="glyphicon glyphicon-user"></span> Posted by: <?php echo $page_owner[0]['configValue'];?></p>
-
+                <p><span class="glyphicon glyphicon-eye-open"></span> Views: <?php  echo $this->viewercounter->incrementViews($categNews['id']); ?></p>
             <?php
            $content = strip_tags($categNews['text']);
 

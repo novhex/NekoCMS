@@ -9,6 +9,12 @@
     <meta name="description" content="<?php echo $pagemeta['configValue']; ?>" />
      <?php endforeach; ?>
 
+        <?php
+        foreach($page_metakw as $pagemetakeywords):
+      ?>
+    <meta name="description" content="<?php echo $pagemetakeywords['configValue']; ?>" />
+     <?php endforeach; ?>
+
     <?php
     foreach($page_owner as $pageowner):
     ?>
@@ -29,9 +35,12 @@
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="<?php echo base_url('css/bootstrap.css');?>" rel="stylesheet" />
     <!-- FONT AWESOME ICONS  -->
-    <link href="<?php echo base_url('css/font-awesome.css');?>" rel="stylesheet" />
+
+    <link href="<?php echo base_url('css/font-awesome/css/font-awesome.css');?>" rel="stylesheet">
     <!-- CUSTOM STYLE  -->
     <link href="<?php echo base_url('css/zontal.css');?>" rel="stylesheet" />
+
+   
      <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
