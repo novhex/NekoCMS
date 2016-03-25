@@ -28,7 +28,7 @@
 						      <?php
 
 
-        if(!empty(validation_errors()))
+        if(validation_errors()!='')
         {
             echo "<div class='alert alert-danger'><a class='close' data-dismiss='alert'>×</a><strong>Error: </strong>".validation_errors()."</div>";
         }

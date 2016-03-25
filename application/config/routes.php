@@ -80,4 +80,5 @@ $route['neko-admin/users']='admincontroller/users';
 $route['neko-admin/forgotpassword']='admincontroller/forgotpassword';
 $route['neko-admin/comments'] = 'admincontroller/comments';
 $route['neko-admin/commentaction']='admincontroller/commentaction';
+$route['neko-admin/viewcomment']='admincontroller/viewcomment';
 $route['translate_uri_dashes'] = FALSE;

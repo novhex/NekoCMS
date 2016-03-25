@@ -98,6 +98,18 @@ class AdminModel extends CI_Model{
 
     }
 
+    public function getBlogCommentbyId($c_id){
+      if($this->hasCurrentLoggedIn()===FALSE){
+          echo 'Access Denied.';
+      }else{
+        $query = $this->db->join('news','news.id = news_comments.news_id ','INNER');
+        $query = $this->db->where('news_comments.c_id',$c_id);
+        $query = $this->db->get('news_comments');
+        return $query->result_array();
+      }
+
+    }
+
     public function hasCurrentLoggedIn(){
 
             $sessionData=$this->session->all_userdata();

@@ -181,6 +181,16 @@ public function commentaction(){
 
 }
 
+
+public function viewcomment(){
+  
+  $c_id = $this->input->post('comment_id');
+  $comment_data['contents'] = $this->adminmodel->getBlogCommentbyId($c_id);
+  $this->load->view('admin_commentpopup',$comment_data);
+
+} 
+
+
 public function dashboard(){
 
 

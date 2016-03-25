@@ -108,6 +108,29 @@
 
             });
 
+
+          $(document).on('click','.viewcomment',function(){
+                var id = this.dataset.commentid;
+
+                       popup = bootbox.dialog({
+                        title: 'Comment',
+                        message: "<center><img src='"+"<?php echo base_url('images/loader.gif'); ?>"+"'></center>",
+                        size: 'large',
+                        onEscape: function(){
+                    }
+
+                    });
+
+                $.ajax({
+                    url: "<?php echo base_url('neko-admin/viewcomment'); ?>",
+                    data: "comment_id="+id,
+                    type: "POST",
+                    success:function(response){
+                        popup.contents().find('.bootbox-body').html(response);
+                    }
+                });
+
+          });
         
          $(document).on('click','.deletecomment',function(){
                     var id=this.dataset.commentid;
