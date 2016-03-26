@@ -24,8 +24,8 @@ class AdminModel extends CI_Model{
 
     public function checkLoginDetails(){
 
-       $username = $this->input->post('username');
-       $password = $this->input->post('password');
+       $username = $this->input->post('username',true);
+       $password = $this->input->post('password',true);
 
        $query = $this->db->from('users');
        $query = $this->db->where('username', $username);
@@ -226,13 +226,13 @@ class AdminModel extends CI_Model{
           if($this->hasCurrentLoggedIn()===FALSE){
      redirect(base_url().'neko-admin/index');
 }
-    $slug = url_title($this->input->post('txt_title'), 'dash', TRUE);
+    $slug = url_title($this->input->post('txt_title',true), 'dash', TRUE);
 
     $data = array(
-        'title' => ucfirst($this->input->post('txt_title')),
+        'title' => ucfirst($this->input->post('txt_title',true)),
         'slug' => $slug,
-        'text' => $this->input->post('txt_content'),
-        'parent_category'=> $this->input->post('dropdownCateg'),
+        'text' => $this->input->post('txt_content',true),
+        'parent_category'=> $this->input->post('dropdownCateg',true),
         'date_posted'=>str_replace("/","-",date("Y/m/d"))
     );
 
@@ -317,26 +317,26 @@ class AdminModel extends CI_Model{
         redirect(base_url().'neko-admin/index');
     }
 
-     $slug = url_title($this->input->post('txt_title'), 'dash', TRUE);
+     $slug = url_title($this->input->post('txt_title',true), 'dash', TRUE);
 
 
     if($this->input->post('dropdownCateg')==='')
     {
          $data = array(
-            'title' => $this->input->post('txt_title'),
-            'text' => $this->input->post('txt_content'),
+            'title' => $this->input->post('txt_title',true),
+            'text' => $this->input->post('txt_content',true),
             'slug'=>$slug
         );
     }else{
       $data = array(
-            'title' => $this->input->post('txt_title'),
-            'text' => $this->input->post('txt_content'),
-            'parent_category'=>$this->input->post('dropdownCateg'),
+            'title' => $this->input->post('txt_title',true),
+            'text' => $this->input->post('txt_content',true),
+            'parent_category'=>$this->input->post('dropdownCateg',true),
             'slug'=>$slug
         );
     }
 
-    $this->db->where('news.slug',$this->input->post('txt_slug'));
+    $this->db->where('news.slug',$this->input->post('txt_slug',true));
     return $this->db->update('news', $data);
 
     }
@@ -346,15 +346,15 @@ class AdminModel extends CI_Model{
          redirect(base_url().'neko-admin/index');
     }
 
-      $slug=url_title($this->input->post('txt_pagetitle'),'dash',TRUE);
+      $slug=url_title($this->input->post('txt_pagetitle',true),'dash',TRUE);
 
       $data=array(
-        'page_name'=>$this->input->post('txt_pagetitle'),
-        'page_description'=>$this->input->post('txt_pagedesc'),
+        'page_name'=>$this->input->post('txt_pagetitle',true),
+        'page_description'=>$this->input->post('txt_pagedesc',true),
         'page_slug'=>$slug
         );
-      $this->db->where('pages.page_slug',$this->input->post('curr_slug'));
-      $this->updatePageParentCategory($slug,$this->input->post('curr_slug'));
+      $this->db->where('pages.page_slug',$this->input->post('curr_slug',true));
+      $this->updatePageParentCategory($slug,$this->input->post('curr_slug',true));
       return $this->db->update('pages',$data);
   }
 
@@ -363,26 +363,26 @@ public function updatesiteInfo($val){
  redirect(base_url().'neko-admin/index');
 }else{
   if($val===1){
-    $this->updateBlogTitle($this->input->post('txt_site_title'));
-    $this->updateBlogMeta($this->input->post('site_meta'));
-    $this->updateBlogOwner($this->input->post('txt_site_owner'));
-    $this->changeUsername($this->input->post('txtnewuser'));
-    $this->changeNick($this->input->post('txtnewnick'));
-    $this->changeBio($this->input->post('txtnewbio'));
-    $this->changeEmail($this->input->post('txtnewmail'));
-    $this->updateBlogMetaKw($this->input->post('site_metakw'));
-    $this->reloadSession($this->input->post('txtnewuser'),$this->input->post('txtnewnick'),$this->input->post('txtnewbio'),$this->input->post('txtnewmail'));
+    $this->updateBlogTitle($this->input->post('txt_site_title',true));
+    $this->updateBlogMeta($this->input->post('site_meta',true));
+    $this->updateBlogOwner($this->input->post('txt_site_owner',true));
+    $this->changeUsername($this->input->post('txtnewuser',true));
+    $this->changeNick($this->input->post('txtnewnick',true));
+    $this->changeBio($this->input->post('txtnewbio',true));
+    $this->changeEmail($this->input->post('txtnewmail',true));
+    $this->updateBlogMetaKw($this->input->post('site_metakw',true));
+    $this->reloadSession($this->input->post('txtnewuser',true),$this->input->post('txtnewnick',true),$this->input->post('txtnewbio',true),$this->input->post('txtnewmail',true));
   }else{
-    $this->updateBlogTitle($this->input->post('txt_site_title'));
-    $this->updateBlogMeta($this->input->post('site_meta'));
-    $this->updateBlogMetaKw($this->input->post('site_metakw'));
-    $this->updateBlogOwner($this->input->post('txt_site_owner'));
-    $this->changeUsername($this->input->post('txtnewuser'));
-    $this->changePassword($this->input->post('txtnewpass'));
-    $this->changeNick($this->input->post('txtnewnick'));
-    $this->changeEmail($this->input->post('txtnewmail'));
-    $this->changeBio($this->input->post('txtnewbio'));
-    $this->reloadSession($this->input->post('txtnewuser'),$this->input->post('txtnewnick'),$this->input->post('txtnewbio'),$this->input->post('txtnewmail'));
+    $this->updateBlogTitle($this->input->post('txt_site_title',true));
+    $this->updateBlogMeta($this->input->post('site_meta',true));
+    $this->updateBlogMetaKw($this->input->post('site_metakw',true));
+    $this->updateBlogOwner($this->input->post('txt_site_owner',true));
+    $this->changeUsername($this->input->post('txtnewuser',true));
+    $this->changePassword($this->input->post('txtnewpass',true));
+    $this->changeNick($this->input->post('txtnewnick',true));
+    $this->changeEmail($this->input->post('txtnewmail',true));
+    $this->changeBio($this->input->post('txtnewbio',true));
+    $this->reloadSession($this->input->post('txtnewuser',true),$this->input->post('txtnewnick',true),$this->input->post('txtnewbio',true),$this->input->post('txtnewmail',true));
 
   }
 }
@@ -541,10 +541,10 @@ public function savepage() {
       if($this->hasCurrentLoggedIn()===FALSE){
      redirect(base_url().'neko-admin/index');
 }
- $slug = url_title($this->input->post('txt_pagetitle'), 'dash', TRUE);
+ $slug = url_title($this->input->post('txt_pagetitle',true), 'dash', TRUE);
     $data=array(
-      'page_name'=>  $this->input->post('txt_pagetitle'),
-       'page_description'=> $this->input->post('txt_pagedesc'),
+      'page_name'=>  $this->input->post('txt_pagetitle',true),
+       'page_description'=> $this->input->post('txt_pagedesc',true),
         'page_slug'=>$slug,
         'date_added'=>str_replace('/','-',date('Y/m/d'))
 

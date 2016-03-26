@@ -8,6 +8,7 @@
 <link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
 <link href="css/datepicker3.css" rel="stylesheet">
 <link href="<?php echo base_url('css/styles.css');?>" rel="stylesheet">
+<link href="<?php echo base_url('css/font-awesome/css/font-awesome.css');?>" rel="stylesheet">
 
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
@@ -45,18 +46,19 @@
         }
         ?>
 							<div class="form-group">
-								<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" >
+								<input style="text-align:center;" type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" >
 							</div>
 							<div class="form-group">
-								 <input type="password"  name="password" id="inputPassword" class="form-control" placeholder="Password">
+								 <input type="password" style="text-align:center;"  name="password" id="inputPassword" class="form-control" placeholder="Password">
 							</div>
 							<div class="checkbox">
 								<label>
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-							<button type="submit" class="btn btn-success">Login</button>
-							<a href="<?php echo base_url();?>" class="btn btn-success">Back to Main Page</a>
+							<button type="submit" class="btn btn-success"><i class="fa fa-lock"></i> Login</button>
+							<a href="<?php echo base_url();?>" class="btn btn-success"><i class="fa fa-home"></i> Back to Main Page</a>
+							<a href="<?php echo base_url('neko-admin/forgotpassword');?>" class="btn btn-success"><i class="fa fa-info-circle"></i> Forgot Password</a>
 						</fieldset>
 					</form>
 				</div>
@@ -66,7 +68,7 @@
 	
 		
 
-	<script src="<?php echo base_url('js/jquery-1.11.1.min.js');?>"></script>
+	<script src="<?php echo base_url('js/jquery.min.js');?>"></script>
 	<script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
 
 	<script>

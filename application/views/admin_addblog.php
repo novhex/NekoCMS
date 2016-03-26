@@ -53,7 +53,7 @@
                             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                                 <div class="form-group">
                                      <label style="color:red;"><?php echo form_error('txt_title');?></label>
-                                    <input  name='txt_title'  id='txt_title' class="form-control" placeholder="Blog Title">
+                                    <input  name='txt_title' value='<?php echo set_value('txt_title');?>'  id='txt_title' class="form-control" placeholder="Blog Title">
                                 </div>
                                                                 
                                 <div class="form-group">
@@ -72,7 +72,7 @@
                                 
                                 <div class="form-group">
                                     <label style="color:red;"><?php echo form_error('txt_content');?></label>
-                                    <textarea name='txt_content' class="form-control" rows="3"></textarea>
+                                    <textarea name='txt_content' class="form-control" rows="3"><?php echo set_value('txt_content');?></textarea>
                                 </div>
                                 
                            

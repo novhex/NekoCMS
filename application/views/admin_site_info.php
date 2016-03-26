@@ -77,14 +77,15 @@
                    </div>
 
                    <h1> <span class='glyphicon glyphicon-sunglasses'></span> Administrator Account </h1>
-                   <div class='alert alert-warning'>[ Note: Leave " New Password " field empty if you don't want  to change your password but if it is the first time to run , please change the default password. ] <a data-dismiss="alert" href="#">X</a></div>
+                   <div class='alert alert-warning'><a class='close' data-dismiss='alert'>×</a>[ Note: Leave " New Password " field empty if you don't want  to change your password but if it is the first time to run , please change the default password. ] </div>
 
                    <hr>
 
                    <div class='form-group'>
                    <div class='col-lg-12'>
-                     <img onClick="$('#imgfile').click();" data-holder-rendered="true" src="<?php echo $userData['display_photo']; ?>" style="width: 150px; height: 150px;" data-src="holder.js/200x200" class="img-thumbnail" alt="default_user's photo">
-                   
+                   <center>
+                     <img onClick="$('#imgfile').click();" data-holder-rendered="true" src="<?php echo $userData['display_photo']; ?>" style="width: 150px; height: 150px;" data-src="holder.js/200x200" class="img-thumbnail" alt="<?php echo $userData['nickname']; ?> photo">
+                   </center>
                      <p style="cursor:pointer;" onClick="$('#imgfile').click();"><span class='glyphicon glyphicon-camera'></span>&nbsp; Click Camera Icon To Update Profile Photo *</p>
                      <input type="file" name="imgfile[]" style="display:none;"  id="imgfile" accept="image/*" class='form-control'/>
                      </div>

@@ -76,51 +76,22 @@ class Admincontroller extends CI_Controller {
 
 
   public function logout(){
+    
          $userData=$this->session->all_userdata();
          $array_items = array('username','__ci_last_regenerate','nickname','logged_in','display_photo');
          $this->session->unset_userdata($array_items);
          $this->session->set_flashdata('dc_notice','You are disconnected...');
-       redirect(base_url().'neko-admin/index');
+         redirect(base_url().'neko-admin/index');
  }
 
 public function inbox($offset=0){
-    $data['page_title']="Dashboard  &raquo; Inbox";
-    $data['page_name']="dashboard";
-
-    /*$uri_segment = 5;
-		$offset = $this->uri->segment($uri_segment);
-
-    $config['base_url'] = base_url().'neko-admin/inbox';
-    $config['total_rows'] =$this->adminmodel->unread_message_count();
-    $config['per_page'] = 10;
-    $config['num_links'] =$this->adminmodel->unread_message_count();
-    $config['use_page_numbers'] = TRUE;
-    $config['prev_link'] = '&laquo;';
-    $config['next_link'] = '&raquo;';
-    $config['full_tag_open'] = '<ul class="pagination">';
-    $config['full_tag_close'] = '</ul>';
-    $config['prev_link'] = '&laquo;';
-    $config['prev_tag_open'] = '<li>';
-    $config['prev_tag_close'] = '</li>';
-    $config['next_tag_open'] = '<li>';
-    $config['next_tag_close'] = '</li>';
-    $config['cur_tag_open'] = '<li class="active"><a href="#">';
-    $config['cur_tag_close'] = '</a></li>';
-    $config['num_tag_open'] = '<li>';
-    $config['num_tag_close'] = '</li>';
-    $this->pagination->initialize($config);
-    $data['message_count']=$this->adminmodel->unread_message_count();
-    $data['message_list']=$this->adminmodel->fetch_unread_messages(10,$offset);
-    $this->load->view('tpl/header',$data);
-    $this->load->view('tpl/sidebar');
-    $this->load->view('admin_inbox',$data);
-    $this->load->view('tpl/footer',$data);*/
-	 
-	 $uri_segment = 3;
-	 $offset = $this->uri->segment($uri_segment);
-	 $config['base_url'] = base_url().'neko-admin/inbox';
+     $data['page_title']="Dashboard  &raquo; Inbox";
+     $data['page_name']="dashboard";
+	   $uri_segment = 3;
+	   $offset = $this->uri->segment($uri_segment);
+	   $config['base_url'] = base_url().'neko-admin/inbox';
      $config['total_rows'] =$this->adminmodel->unread_message_count();
- 	 $config['per_page'] = 10;
+ 	   $config['per_page'] = 10;
      $config['prev_link'] = '&laquo;';
      $config['next_link'] = '&raquo;';
      $config['full_tag_open'] = '<ul class="pagination">';
@@ -134,17 +105,14 @@ public function inbox($offset=0){
      $config['cur_tag_close'] = '</a></li>';
      $config['num_tag_open'] = '<li>';
      $config['num_tag_close'] = '</li>';
-	 $config['uri_segment'] = $uri_segment;
-	 $this->pagination->initialize($config);
+	   $config['uri_segment'] = $uri_segment;
+	   $this->pagination->initialize($config);
      $data['message_count']=$this->adminmodel->unread_message_count();
      $data['message_list']=$this->adminmodel->fetch_unread_messages(10,$offset);
      $this->load->view('tpl/header',$data);
      $this->load->view('tpl/sidebar');
      $this->load->view('admin_inbox',$data);
      $this->load->view('tpl/footer',$data);
-
-
-
 }
 
 public function comments(){
@@ -474,9 +442,11 @@ public function defaultsearch(){
         endforeach;
 }
 
-public function siteinfoValidationRules($type){
+public function siteinfoValidationRules($type=NULL){
 
+if($type!=NULL && $this->adminmodel->hasCurrentLoggedIn()!==FALSE){
     if($type===1){
+
       $this->form_validation->set_rules('txt_site_owner','Site Owner','required|trim|max_length[45]');
       $this->form_validation->set_rules('txt_site_title','Site Name','required|trim|max_length[45]');
       $this->form_validation->set_rules('site_meta','Site Meta','required|trim|max_length[160]');
@@ -485,7 +455,9 @@ public function siteinfoValidationRules($type){
       $this->form_validation->set_rules('txtnewnick','Nickname','required|trim|max_length[45]');
       $this->form_validation->set_rules('txtnewbio','Bio','required|trim|max_length[100]');
       $this->form_validation->set_rules('txtnewmail','Email','required|trim|max_length[255]');
+
     }  else{
+
       $this->form_validation->set_rules('txt_site_owner','Site Owner','required|trim|max_length[45]');
       $this->form_validation->set_rules('txt_site_title','Site Name','required|trim|max_length[45]');
       $this->form_validation->set_rules('site_meta','Site Meta','required|trim|max_length[160]');
@@ -497,6 +469,9 @@ public function siteinfoValidationRules($type){
       $this->form_validation->set_rules('txtnewmail','Email','required|trim|max_length[255]');
       $this->form_validation->set_rules('txtnewpasscf', 'Password Confirmation', 'trim|required|matches[txtnewpass]');
     }
+  }else{
+    redirect(base_url());
+  }
 
 }
 
@@ -506,7 +481,7 @@ public function uploadPhoto($source_file,$file_name,$project_url){
 			if(isset($file_name)&&isset($source_file))
 			{
 
-					for($i=0; $i<count($source_file);$i++)
+					for($i=0; $i<=1;$i++)
 					{
 						if(getimagesize($source_file[$i])>0) {
 							$uploaded_state=move_uploaded_file($source_file[$i],$this->dir_path.$rand_name.$file_name[$i]);

@@ -24,6 +24,8 @@
       $string_to_replace=".....";
         $content= substr($stringCut, 0, strrpos($stringCut, ' '))."&nbsp;&nbsp;".$string_to_replace;
         echo "<p align='justify'></br>".$content."</p>";
+     }else{
+        echo $content;
      }
     ?>
           <div class="text-center">

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Login</title>
+<title>Admin Forgot Password</title>
 
 <link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
 <link href="<?php echo base_url('css/styles.css');?>" rel="stylesheet">
@@ -27,7 +27,7 @@
           <form role="form" action="<?php echo base_url('neko-admin/forgotpassword'); ?>" method="POST" accept-charset="utf-8">
             <fieldset>
     <?php
-        if(!empty(validation_errors()))
+        if(validation_errors()!='')
         {
             echo "<div class='alert alert-danger'><a class='close' data-dismiss='alert'>×</a><strong>Error: </strong>".validation_errors()."</div>";
         }
@@ -52,7 +52,7 @@
   
     
 
-  <script src="<?php echo base_url('js/jquery-1.11.1.min.js');?>"></script>
+  <script src="<?php echo base_url('js/jquery.min.js');?>"></script>
   <script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
 
   <script>
