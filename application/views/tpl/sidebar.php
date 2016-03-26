@@ -13,5 +13,7 @@
 			<li><a href="<?php echo base_url('neko-admin/pages');?>"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>View All Page Category</a></li>
 			<li><a href="<?php echo base_url('neko-admin/inbox');?>"><svg class="glyph stroked email"><use xlink:href="#stroked-email"/></svg> Unread Messages</a></li>
 			<li><a href="<?php echo base_url('neko-admin/logout');?>"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"/></svg> Logout <?php  echo $this->session->userdata('nickname');?></a></li>
-</ul>
- </div>
+			</ul>
+		</div>
+
+ 
