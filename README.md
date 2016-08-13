@@ -1,4 +1,7 @@
 # NekoCMS
+PLS. Fork or download the new neko cms v2 here
+https://github.com/novhex/NekoCMS-v2
+DEVELOPMENT ENDED FOR THIS PROJECT
 
 Changelog 
 March 23 2016
